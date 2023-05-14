@@ -1,1 +1,3 @@
-# munay
+<div align="center">
+# Munay
+ </div>
