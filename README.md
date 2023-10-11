@@ -21,26 +21,26 @@ Munay es un proyecto en proceso realizado por alumnos de la Escuela Secundaria I
 </div>
 
 ### Basile Ignacio Javier
-    📷 Instagram: xx
+    📷 Instagram: basilee05
     📧 Email: xx
 ### Echezuria Gonzales Jorge Luis
-    📷 Instagram: xx
+    📷 Instagram: jorgeechezuria_
     📧 Email: xx
 ### Heis Demian Hernan
-    📷 Instagram: xx
-    📧 Email: xx
+    📷 Instagram: _demian.h_
+    📧 Email: demiheis@gmail.com
 ### Minaya Palomino Jesús Eduardo
-    📷 Instagram: xx
+    📷 Instagram: jesusminaya_
     📧 Email: jesusminayapalomino@gmail.com
 ### Ordoñez Lucero
-    📷 Instagram: xx
+    📷 Instagram: lucero092_
     📧 Email: xx
 ### Retamar Faustina
-    📷 Instagram: xx
-    📧 Email: xx
+    📷 Instagram: faustinaar_
+    📧 Email: retamarfaustinaa@gmail.com
 ### Rios Celeste Aylen
-    📷 Instagram: xx
-    📧 Email: xx
+    📷 Instagram: celestearios
+    📧 Email: celesteaylenrios@gmail.com
 
 ## Cómo contactarnos
 Si tenes opiniones o dudas sobre el proyecto que nos puedan ayudar, no dudes en ponerte en contacto con nosotros:
