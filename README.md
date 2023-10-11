@@ -16,7 +16,7 @@ Munay es un proyecto en proceso realizado por alumnos de la Escuela Secundaria I
 ## Integrantes
 <div align="center">
 
-<img src="imagenes/integrantes.jpg" alt="Integrantes" width="450"/>
+<img src="imagenes/munay.jpg" alt="Integrantes" width="450"/>
 
 </div>
 
