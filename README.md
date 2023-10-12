@@ -47,4 +47,4 @@ Si tenes opiniones o dudas sobre el proyecto que nos puedan ayudar, no dudes en 
     📧 Email: munay.impatrq@gmail.com
     🌐 Página Web: xx
     📷 Instagram: @proyecto_impa
-    🗞️ LinkedIn: https://linktr.ee/proyecto_munay
+    🗞️ Linktr.ee: https://linktr.ee/proyecto_munay
