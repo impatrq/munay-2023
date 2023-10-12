@@ -45,7 +45,7 @@ Munay es un proyecto en proceso realizado por alumnos de la Escuela Secundaria I
 ## Cómo contactarnos
 Si tenes opiniones o dudas sobre el proyecto que nos puedan ayudar, no dudes en ponerte en contacto con nosotros:
 
-    📧 Email: jesusminayapalomino@gmail.com
-    🌐 Página Web: https://projectgreenhouse.github.io/
+    📧 Email: munay.impatrq@gmail.com
+    🌐 Página Web: xx
     📷 Instagram: @proyecto_impa
     🗞️ LinkedIn: https://linktr.ee/proyecto_munay
