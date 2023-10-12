@@ -25,7 +25,7 @@ Munay es un proyecto en proceso realizado por alumnos de la Escuela Secundaria I
     📧 Email: xx
 ### Echezuria Gonzales Jorge Luis
     📷 Instagram: jorgeechezuria_
-    📧 Email: xx
+    📧 Email: jlechezuria@gmail.com
 ### Heis Demian Hernan
     📷 Instagram: _demian.h_
     📧 Email: demiheis@gmail.com
