@@ -2,7 +2,7 @@
 
 # Munay
 
-<img src="Downloads/munay logo_Mesa de trabajo 1.png" alt="Logo proyecto" width="250"/>
+<img src="C:\Users\juanr\Downloads\munay logo_Mesa de trabajo 1.png" alt="Logo proyecto" width="250"/>
 
 </div>
 
