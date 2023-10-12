@@ -2,8 +2,7 @@
 
 # Munay
 
-<img src="munay logo_Mesa de trabajo 1.png" alt="Logo proyecto" width="250"/>
-
+<img src="descargas/munay logo_Mesa de trabajo 1.jpg" alt="Logo proyecto" width="250"/>
 </div>
 
 ## Qué es Munay?
