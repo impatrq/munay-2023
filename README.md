@@ -86,7 +86,7 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 ### Minaya, Jesús Eduardo
 --> 📷 Instagram: jesusminaya_
 
---> 📧 @gmail.com
+--> 📧 jesusminayapalomino@gmail.com
 
 ### Ordoñez, Lucero Soledad Rubi
 --> 📷 Instagram: lucero092_
