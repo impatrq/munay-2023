@@ -1,6 +1,6 @@
 <div align="center">
 
-# [Proyecto Munay - IMPA TRQ]([https://smart-toolbox.vercel.app/](https://www.instagram.com/proyecto_munay/)
+# [Proyecto Munay - IMPA TRQ] (https://www.instagram.com/proyecto_munay/)
 
 <img src="images/munay logo-02 (1)1.png" height="400" width="400" />
 
@@ -18,7 +18,7 @@
 
 # Munay
 
-<img src="descargas/munay logo_Mesa de trabajo 1.jpg" alt="Logo proyecto" width="250"/>
+<img src="images/munay logo-02 (1)1.png" alt="Logo proyecto" width="250"/>
 </div>
 
 ## Qué es Munay?
