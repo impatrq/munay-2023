@@ -2,7 +2,7 @@
 
 # [Proyecto Munay - IMPA TRQ](https://www.instagram.com/proyecto_munay/)
 
-<img src="munay logo-02 (1)1.png" height="100" width="450" />
+<img src="/imagenes/munay logo-02 (1)1.png" height="100" width="450" />
 
 &nbsp;
 
@@ -105,7 +105,7 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 <div align="center">
 
-<img src="fotogrupal_munay.jpg" width="450"/>
+<img src="/imagenes/fotogrupal_munay.jpg" width="450"/>
 
 </div>
 
