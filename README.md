@@ -7,7 +7,9 @@
 
 ## Qué es Munay?
 
-Munay es un vehículo eléctrico especializado para la industria aeroportuaria, capaz de detectar y eliminar FOD en las pistas de los aeropuertos, mejorando significativamente la seguridad y la eficiencia operativa en un esfuerzo por contribuir a la sostenibilidad ambiental al extender la vida útil de las baterías desechadas## Quiénes desarrollan este proyecto?
+Munay es un vehículo eléctrico especializado para la industria aeroportuaria, capaz de detectar y eliminar FOD en las pistas de los aeropuertos, mejorando significativamente la seguridad y la eficiencia operativa en un esfuerzo por contribuir a la sostenibilidad ambiental al extender la vida útil de las baterías desechadas.
+
+## Quiénes desarrollan este proyecto?
 Munay es un proyecto en proceso realizado por alumnos de la Escuela Secundaria IMPA de 7mo 2da Avionica.
 
 ## Integrantes
