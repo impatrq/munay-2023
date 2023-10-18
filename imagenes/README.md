@@ -105,7 +105,7 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 <div align="center">
 
-<img src="fotogrupal.HEIC" width="450"/>
+<img src="fotogrupal_munay.jpg" width="450"/>
 
 </div>
 
