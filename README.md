@@ -1,8 +1,8 @@
 <div align="center">
 
-# [Smart Toolbox](https://smart-toolbox.vercel.app/)
+# [Proyecto Munay - IMPA TRQ]([https://smart-toolbox.vercel.app/](https://www.instagram.com/proyecto_munay/)
 
-<img src="https://user-images.githubusercontent.com/80327788/190393898-d13cce88-e29e-45da-8dda-b5642c21e2eb.png" height="400" width="400" />
+<img src="images/munay logo-02 (1)1.png" height="400" width="400" />
 
 &nbsp;
 
