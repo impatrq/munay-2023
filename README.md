@@ -68,40 +68,53 @@
 Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 ### Basile, Ignacio Javier
+```
 --> 📷 Instagram: basilee05
 
 --> 📧 ignaciojavierbasile@gmail.com
+```
 
 ### Echezuria Gonzalez, Jorge Luis
+```
 --> 📷 Instagram: jorgeechezuria_
 
-
 --> 📧 jlechezuria@gmail.com
+```
 
 ### Heis, Demian Hernán
+```
 --> 📷 Instagram: demian.h_
 
 --> 📧 @gmail.com
+```
 
-### Minaya, Jesús Eduardo
+### Minaya Palomino, Jesús Eduardo
+```
 --> 📷 Instagram: jesusminaya_
 
 --> 📧 jesusminayapalomino@gmail.com
+```
 
 ### Ordoñez, Lucero Soledad Rubi
+```
 --> 📷 Instagram: lucero092_
 
 --> 📧 @gnmail.com
+```
 
 ### Retamar, Faustina
+```
 --> 📷 Instagram: faustinaar_
 
 --> 📧 @gmail.com
+```
 
 ### Rios, Celeste Aylen
+```
 --> 📷 Instagram: celestearios
 
 --> 📧 @gmail.com
+```
 
 <div align="center">
 
@@ -112,9 +125,6 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 ## ¿Cómo contactarnos?
 
 * 📧 Email: munay.impatrq@gmail.com
-
-* 🌐 Página Web: xx
-
-* 📷 Instagram: @proyecto_munay
-
-* 🗞️ Linktr.ee: https://linktr.ee/proyecto_munay
+* Web: https://proyectomunay.github.io/
+* Forms: https://forms.gle/bTFmM519xTRqhbh27
+* 
