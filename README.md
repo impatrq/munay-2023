@@ -8,7 +8,7 @@
 
 | Página web | Email | Instagram |
 |------------|-------|-----------|
-|[Munay Web](https://www.google.com.ar/?hl=es)|munay.impatrq@gmail.com|[@proyecto_munay](https://www.instagram.com/proyecto_munay/)|
+|[Munay Web](https://proyectomunay.github.io/)|munay.impatrq@gmail.com|[@proyecto_munay](https://www.instagram.com/proyecto_munay/)|
 
 &nbsp;
 
