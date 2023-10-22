@@ -24,44 +24,6 @@ El proyecto Munay surgió a partir de una visita al aeropuerto Jorge Newbery (ae
 Munay se destaca como un sistema de supervisión simplificado y altamente eficiente para la detección de FOD. Un vehículo eléctrico especialmente adaptado con cuatro cámaras estratégicamente ubicadas. Estas cámaras no solo proporcionan una vista precisa de la superficie terrestre, sino que, gracias a algoritmos de inteligencia artificial, también pueden detectar FOD tanto en tierra como en el cielo. Desarrollaremos un software personalizado que es esencial para esta solución. Cuando se conecta a Munay, ofrece una interfaz de usuario intuitiva que muestra las imágenes en tiempo real de las cuatro cámaras. La simplicidad es clave, los operadores solo necesitan traer su propia computadora de trabajo y conectarla al vehículo a través de USB en el soporte personalizado del auto.
 
 
-## Tecnologías utilizadas
-
-### Aplicación móvil
-
-- Ionic con React
-- Typescript
-- Bootstrap
-
-### Interfaz gráfica
-
-- Electron
-- React
-- Typescript
-- Bootstrap
-
-### Esquemáticos
-
-- KiCad
-
-### Página web
-
-- Next.js
-- Typescript
-- TailwindCSS
-- Bootstrap
-
-### Base de datos
-
-- Firebase Realtime Database
-
-### Microcontrolador
-
-- uPython
-
-### Planos
-
-- AutoCAD
-
 ## ¿Quiénes somos?
 
 Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
