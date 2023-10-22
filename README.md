@@ -38,7 +38,7 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 --> 📧 jlechezuria@gmail.com
 
---> LinkedIn: https://www.linkedin.com/in/jorge-echezuria/
+--> LinkedIn: https://www.linkedin.com/in/jorge-echezuria-60962a245/
 
 ### Heis, Demian Hernán
 --> 📷 Instagram: demian.h_
