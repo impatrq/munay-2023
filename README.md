@@ -55,12 +55,14 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 ### Ordoñez, Lucero Soledad Rubi
 --> 📷 Instagram: lucero092_
 
---> 📧 @gnmail.com
+--> 📧 @gmmail.com
 
 ### Retamar, Faustina
 --> 📷 Instagram: faustinaar_
 
---> 📧 @gmail.com
+--> 📧 retamarfaustinaa@gmail.com
+
+--> LinkedIn: https://www.linkedin.com/in/demian-heis/
 
 ### Rios, Celeste Aylen
 --> 📷 Instagram: celestearios
