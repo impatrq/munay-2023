@@ -50,24 +50,28 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 ### Minaya, Jesús Eduardo
 --> 📷 Instagram: jesusminaya_
 
---> 📧 @gmail.com
+--> 📧 jesusminayapalomino@gmail.com
+
+--> LinkedIn: http://www.linkedin.com/in/jesus-minaya-53a314292
 
 ### Ordoñez, Lucero Soledad Rubi
 --> 📷 Instagram: lucero092_
 
---> 📧 @gmmail.com
+--> 📧 lucerosoledad56@gmail.com
 
 ### Retamar, Faustina
 --> 📷 Instagram: faustinaar_
 
 --> 📧 retamarfaustinaa@gmail.com
 
---> LinkedIn: https://www.linkedin.com/in/demian-heis/
+--> LinkedIn: https://www.linkedin.com/in/faustina-retamar-43ab861a6/
 
 ### Rios, Celeste Aylen
 --> 📷 Instagram: celestearios
 
---> 📧 @gmail.com
+--> 📧 celesteaylenrios@gmail.com
+
+--> LinkedIn: https://www.linkedin.com/in/celestearios/
 
 
 <div align="center">
