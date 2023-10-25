@@ -47,7 +47,7 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 --> LinkedIn: https://www.linkedin.com/in/demian-heis/
 
-### Minaya, Jesús Eduardo
+### Minaya Palomino, Jesús Eduardo
 --> 📷 Instagram: jesusminaya_
 
 --> 📧 jesusminayapalomino@gmail.com
