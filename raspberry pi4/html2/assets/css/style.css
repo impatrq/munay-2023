@@ -1,0 +1,588 @@
+/*velocimemtro>*/
+@font-face {
+  font-family: 'Changa One';
+  font-style: italic;
+  font-weight: 2;
+  src: url(https://fonts.gstatic.com/s/changaone/v18/xfu20W3wXn3QLUJXhzq42ATSu5_a.ttf) format('truetype');
+}
+
+html {
+  font-size: 30px;
+}
+body {
+  background: rgb(88, 132, 145);
+  color: white;
+  font-family: 'Open Sans', sans;
+}
+
+.gauge::before {
+  padding-top: 100%;
+  content: '';
+  display: block;
+}
+.gauge::after {
+  font-size: 0.5rem;
+  font-weight: bold;
+  display: block;
+  content: '';
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+}
+.gauge .pointer {
+  z-index: 4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.gauge .pointer::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 22%;
+  height: 22%;
+  left: 39%;
+  top: 39%;
+  border-radius: 100%;
+  box-shadow: inset 0 0 1rem 1px rgba(51, 153, 255, 0.5), 0 0 5rem 0.1rem #137;
+}
+.gauge .pointer .hand {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform-origin: center center;
+  transform: rotate(-30deg);
+  transition: transform linear 0.2s;
+}
+.gauge .pointer .hand::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 39%;
+  height: 2%;
+  top: 49%;
+  right: 56%;
+  background: #fff;
+  border: 1px solid #fff;
+  border-right: 0;
+  border-bottom-left-radius: 1.7rem 0.25rem;
+  border-top-left-radius: 1.7rem 0.25rem;
+  box-shadow: inset 0px 0 1px #000;
+  z-index: 1;
+}
+.gauge .pointer .hand::before {
+  content: '';
+  display: block;
+  border: 1px solid #fff;
+  position: absolute;
+  width: 12%;
+  height: 5.5%;
+  left: 44%;
+  top: 47.25%;
+  box-sizing: border-box;
+  border-radius: 20%;
+  background: #e6e7e8;
+  box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.25);
+  z-index: 0;
+}
+.gauge .digit {
+  position: absolute;
+  top: 49.375%;
+  right: 50%;
+  width: 50%;
+  height: 1.25%;
+  border-left: 1.1rem solid white;
+  transform-origin: center right;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.gauge .digit:nth-of-type(1) {
+  transform: rotate(-30deg);
+}
+.gauge .digit:nth-of-type(1) .label {
+  transform: rotate(30deg);
+}
+.gauge .digit:nth-of-type(2) {
+  transform: rotate(0deg);
+}
+.gauge .digit:nth-of-type(2) .label {
+  transform: rotate(0deg);
+}
+.gauge .digit:nth-of-type(3) {
+  transform: rotate(30deg);
+}
+.gauge .digit:nth-of-type(3) .label {
+  transform: rotate(-30deg);
+}
+.gauge .digit:nth-of-type(4) {
+  transform: rotate(60deg);
+}
+.gauge .digit:nth-of-type(4) .label {
+  transform: rotate(-60deg);
+}
+.gauge .digit:nth-of-type(5) {
+  transform: rotate(90deg);
+}
+.gauge .digit:nth-of-type(5) .label {
+  transform: rotate(-90deg);
+}
+.gauge .digit:nth-of-type(6) {
+  transform: rotate(120deg);
+}
+.gauge .digit:nth-of-type(6) .label {
+  transform: rotate(-120deg);
+}
+.gauge .digit:nth-of-type(7) {
+  transform: rotate(150deg);
+}
+.gauge .digit:nth-of-type(7) .label {
+  transform: rotate(-150deg);
+}
+.gauge .digit:nth-of-type(8) {
+  transform: rotate(180deg);
+}
+.gauge .digit:nth-of-type(8) .label {
+  transform: rotate(-180deg);
+}
+.gauge .digit:nth-of-type(9) {
+  transform: rotate(210deg);
+}
+.gauge .digit:nth-of-type(9) .label {
+  transform: rotate(-210deg);
+}
+.gauge .digit:nth-of-type(10) {
+  transform: rotate(240deg);
+}
+.gauge .digit:nth-of-type(10) .label {
+  transform: rotate(-240deg);
+}
+.gauge .digit:nth-of-type(11) {
+  transform: rotate(270deg);
+}
+.gauge .digit:nth-of-type(11) .label {
+  transform: rotate(-270deg);
+}
+.gauge .digit .label {
+  position:absolute;
+  font-family: 'Changa One', cursive;
+  font-style: italic;
+  font-size: 1rem;
+  bottom: -0.5rem;
+  left: -1%;
+  text-shadow: 0.1rem 0.1rem 0.1rem black, 0.1rem -0.1rem 0.1rem black, -0.1rem 0.1rem 0.1rem black, -0.1rem -0.1rem 0.1rem black;
+  box-shadow: 0 0 1rem 1rem rgba(195, 225, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+}
+.gauge .digit.highlighted {
+  border-left-color: red;
+}
+.gauge .digit .line {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 50%;
+  border-left: 0.5rem solid white;
+  border-right: 0.5rem solid transparent;
+  left: -1rem;
+  top: 25%;
+  transform: rotate(3deg);
+  transform-origin: center right;
+  /* 10 segements in main area */
+  /* 6 segments in main area */
+}
+.gauge .digit .line.highlighted {
+  border-left-color: red;
+}
+.gauge .digit .line.separating {
+  top: 12.5%;
+  height: 75%;
+}
+.gauge .digit .line.separating::after {
+  content: '';
+  display: block;
+  border-left: 2.5rem solid rgba(255, 255, 255, 0.15);
+  border-top: 0.075rem solid transparent;
+  border-bottom: 0.075rem solid transparent;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0.25rem;
+}
+.gauge .digit .line:nth-child(1):nth-last-of-type(9) {
+  transform: rotate(3deg);
+}
+.gauge .digit .line:nth-child(2):nth-last-of-type(8) {
+  transform: rotate(6deg);
+}
+.gauge .digit .line:nth-child(3):nth-last-of-type(7) {
+  transform: rotate(9deg);
+}
+.gauge .digit .line:nth-child(4):nth-last-of-type(6) {
+  transform: rotate(12deg);
+}
+.gauge .digit .line:nth-child(5):nth-last-of-type(5) {
+  transform: rotate(15deg);
+}
+.gauge .digit .line:nth-child(6):nth-last-of-type(4) {
+  transform: rotate(18deg);
+}
+.gauge .digit .line:nth-child(7):nth-last-of-type(3) {
+  transform: rotate(21deg);
+}
+.gauge .digit .line:nth-child(8):nth-last-of-type(2) {
+  transform: rotate(24deg);
+}
+.gauge .digit .line:nth-child(9):nth-last-of-type(1) {
+  transform: rotate(27deg);
+}
+.gauge .digit .line:nth-child(1):nth-last-of-type(5) {
+  transform: rotate(5deg);
+}
+.gauge .digit .line:nth-child(2):nth-last-of-type(4) {
+  transform: rotate(10deg);
+}
+.gauge .digit .line:nth-child(3):nth-last-of-type(3) {
+  transform: rotate(15deg);
+}
+.gauge .digit .line:nth-child(4):nth-last-of-type(2) {
+  transform: rotate(20deg);
+}
+.gauge .digit .line:nth-child(5):nth-last-of-type(1) {
+  transform: rotate(25deg);
+}
+.gauge .limiter {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: bottom center;
+  transform: rotate(30deg);
+  overflow: hidden;
+  z-index: 0;
+}
+.gauge .limiter::after {
+  content: '';
+  width: 99.5%;
+  height: 199%;
+  border: 0.6rem solid;
+  border-color: red red transparent transparent;
+  border-radius: 100%;
+  display: block;
+  box-sizing: border-box;
+  transform: rotate(96deg);
+}
+#speedmeter {
+  margin:30px 19px;
+  width: 12rem;
+  display: inline-block;
+  position: absolute;
+  left: 2rem;
+}
+#speedmeter .gauge::after {
+  content: 'km/h';
+}
+#speedmeter .gauge .pointer::after {
+  content: "20 km/h";
+  color: #fff;
+  top: 65%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: block;
+  position: absolute;
+  font-size: 0.5rem;
+}
+#revmeter {
+  margin: 1rem 2rem;
+  width: 12rem;
+  display: inline-block;
+  position:relative;
+  right:1.5rem;
+}
+#revmeter .gauge::after {
+  content: 'x1000r/min';
+}
+#revmeter .gauge .label {
+  font-size: 1.4rem;
+  bottom: -0.7rem;
+  left: 10%;
+}
+#revmeter .gauge .pointer .hand {
+  animation-name: startUp, speedUp, speedDown;
+  animation-duration: 10s, 25s, 51s;
+  animation-delay: 2s, 12s, 37s;
+  animation-timing-function: linear, linear, linear;
+}
+#revmeter .gauge .pointer::after {
+  font-family: 'Changa One', cursive;
+  font-style: italic;
+  content: 'N';
+  color: #99c459;
+  top: 75%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: block;
+  position: absolute;
+  font-size: 1rem;
+  animation-name: gearUpshift, gearDownshift;
+  animation-duration: 25s, 51s;
+  animation-timing-function: linear, linear;
+  animation-delay: 12s, 37s;
+}
+@keyframes startUp {
+  0% {
+    transform: rotate(-30deg);
+  }
+  5% {
+    transform: rotate(15deg);
+  }
+  10% {
+    transform: rotate(13deg);
+  }
+  15% {
+    transform: rotate(17deg);
+  }
+  20% {
+    transform: rotate(12deg);
+  }
+  25% {
+    transform: rotate(17deg);
+  }
+  35% {
+    transform: rotate(13deg);
+  }
+  55% {
+    transform: rotate(16deg);
+  }
+  60% {
+    transform: rotate(14deg);
+  }
+  65% {
+    transform: rotate(15deg);
+  }
+  70% {
+    transform: rotate(-7.5deg);
+  }
+  100% {
+    transform: rotate(-7.5deg);
+  }
+}
+@keyframes speedUp {
+  0% {
+    transform: rotate(-7.5deg);
+  }
+  1.5% {
+    transform: rotate(-7.5deg);
+  }
+  3% {
+    transform: rotate(90deg);
+  }
+  4% {
+    transform: rotate(85deg);
+  }
+  5% {
+    transform: rotate(92deg);
+  }
+  6% {
+    transform: rotate(87deg);
+  }
+  7% {
+    transform: rotate(92deg);
+  }
+  8% {
+    transform: rotate(80deg);
+  }
+  /* 1st gear */
+  9.5% {
+    transform: rotate(40deg);
+  }
+  11% {
+    transform: rotate(75deg);
+  }
+  12% {
+    transform: rotate(100deg);
+  }
+  13% {
+    transform: rotate(140deg);
+  }
+  14% {
+    transform: rotate(171deg);
+  }
+  /* 2nd gear */
+  15% {
+    transform: rotate(100deg);
+  }
+  17% {
+    transform: rotate(140deg);
+  }
+  19% {
+    transform: rotate(171deg);
+  }
+  /* 3rd gear */
+  20% {
+    transform: rotate(100deg);
+  }
+  24% {
+    transform: rotate(140deg);
+  }
+  28% {
+    transform: rotate(171deg);
+  }
+  /* 4th gear */
+  29% {
+    transform: rotate(100deg);
+  }
+  36% {
+    transform: rotate(140deg);
+  }
+  43% {
+    transform: rotate(171deg);
+  }
+  /* 5th gear */
+  44% {
+    transform: rotate(100deg);
+  }
+  54% {
+    transform: rotate(140deg);
+  }
+  64% {
+    transform: rotate(171deg);
+  }
+  /* 6th gear */
+  65% {
+    transform: rotate(100deg);
+  }
+  80% {
+    transform: rotate(140deg);
+  }
+  95% {
+    transform: rotate(171deg);
+  }
+  /* fullspeed */
+  96% {
+    transform: rotate(169deg);
+  }
+  96.5% {
+    transform: rotate(172deg);
+  }
+  97% {
+    transform: rotate(167deg);
+  }
+  97.5% {
+    transform: rotate(171deg);
+  }
+  98% {
+    transform: rotate(175deg);
+  }
+  98.5% {
+    transform: rotate(169deg);
+  }
+  99% {
+    transform: rotate(173deg);
+  }
+  99.5% {
+    transform: rotate(168deg);
+  }
+  100% {
+    transform: rotate(171deg);
+  }
+}
+@keyframes speedDown {
+  /* 6th gear - 25s */
+  0% {
+    transform: rotate(171deg);
+  }
+  58% {
+    transform: rotate(17deg);
+  }
+  /* 5th gear  - 5s */
+  59% {
+    transform: rotate(47deg);
+  }
+  66% {
+    transform: rotate(17deg);
+  }
+  /* 4th gear - 5s */
+  67% {
+    transform: rotate(47deg);
+  }
+  74% {
+    transform: rotate(17deg);
+  }
+  /* 3rd gear - 5s */
+  75% {
+    transform: rotate(47deg);
+  }
+  82% {
+    transform: rotate(17deg);
+  }
+  /* 2nd gear - 5s */
+  83% {
+    transform: rotate(47deg);
+  }
+  90% {
+    transform: rotate(17deg);
+  }
+  /* 1st gear - 5s */
+  91% {
+    transform: rotate(47deg);
+  }
+  98% {
+    transform: rotate(17deg);
+  }
+  100% {
+    transform: rotate(-7.5deg);
+  }
+}
+@keyframes gearUpshift {
+  9% {
+    content: '1';
+  }
+  15% {
+    content: '2';
+  }
+  20% {
+    content: '3';
+  }
+  29% {
+    content: '4';
+  }
+  44% {
+    content: '5';
+  }
+  65% {
+    content: '6';
+  }
+}
+@keyframes gearDownshift {
+  from {
+    content: '6';
+  }
+  58.5% {
+    content: '5';
+  }
+  66.5% {
+    content: '4';
+  }
+  74.5% {
+    content: '3';
+  }
+  82.5% {
+    content: '2';
+  }
+  90.5% {
+    content: '1';
+  }
+  98.5% {
+    content: 'N';
+  }
+}

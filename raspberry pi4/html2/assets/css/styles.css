@@ -1,0 +1,234 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --gradient-color-red: linear-gradient(90deg, 
+                          hsl(7, 89%, 46%) 15%,
+                          hsl(11, 93%, 68%) 100%);
+  --gradient-color-orange: linear-gradient(90deg, 
+                           hsl(22, 89%, 46%) 15%,
+                           hsl(54, 90%, 45%) 100%);
+  --gradient-color-yellow: linear-gradient(90deg, 
+                           hsl(54, 89%, 46%) 15%,
+                           hsl(92, 90%, 45%) 100%);
+  --gradient-color-green: linear-gradient(90deg, 
+                          hsl(92, 89%, 46%) 15%,
+                          hsl(92, 90%, 68%) 100%);
+  --text-color: #fff;
+  --body-color: hsl(0, 0%, 11%);
+  --container-color: hsl(0, 0%, 9%);
+
+  /*==========la fuente y tipografia==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Rubik', sans-serif;
+
+  --biggest-font-size: 2.5rem;
+  --normal-font-size: .938rem;
+  --smaller-font-size: .7rem;
+}
+
+/* tipografia para distintas pantallas */
+@media screen and (min-width: 968px) {
+  :root {
+    --biggest-font-size: 2rem;
+    --normal-font-size: 1rem;
+    --smaller-font-size: .7rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: initial;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+/*=============== BATTERY ===============*/
+.battery {
+  height: 100vh;
+  display: contents;
+  place-items: left;
+  margin: 0 35rem;
+
+}
+
+.battery__card {
+  position: relative;
+  height: 165px;
+  background-color: var(--container-color);
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  left:20rem;
+}
+
+.battery__text {
+  margin-bottom: .5rem;
+}
+
+.battery__percentage {
+  font-size: var(--biggest-font-size);
+  position: relative;
+  bottom: 1.2rem;
+}
+
+
+.battery__status {
+  position: absolute;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  column-gap: -.1rem;
+  font-size: var(--smaller-font-size);
+}
+
+.battery__status i {
+  font-size: 1.3rem;
+}
+
+.battery__pill {
+  position: absolute;
+  width: 55px;
+  height: 106px;
+  background-color: var(--container-color);
+  box-shadow: inset 20px 0 48px hsl(0, 0%, 16%), 
+              inset -4px 12px 48px hsl(0, 0%, 56%);
+  border-radius: 3rem;
+  justify-self: flex-end;
+  left:6.800000000000001rem;
+}
+
+.battery__level {
+  position: absolute;
+  inset: 2px;
+  border-radius: 3rem;
+  overflow: hidden;
+}
+
+.battery__liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: var(--gradient-color-red);
+  box-shadow: inset -10px 0 12px hsla(0, 0%, 0%, .1), 
+              inset 12px 0 12px hsla(0, 0%, 0%, .15);
+  transition: .3s;
+}
+
+.battery__liquid::after {
+  content: '';
+  position: absolute;
+  height: 8px;
+  background: var(--gradient-color-red);
+  box-shadow: inset 0px -3px 6px hsla(0, 0%, 0%, .2);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: -4px;
+  border-radius: 50%;
+}
+
+/* color del icon de bateria completa*/
+.green-color {
+  background: var(--gradient-color-green);
+}
+
+/* animacion de la bateria cargando */
+.animated-green {
+  background: var(--gradient-color-green);
+  animation: animated-charging-battery 1.2s infinite alternate;
+}
+
+/* bateria baja animacion */
+.animated-red {
+  background: var(--gradient-color-red);
+  animation: animated-low-battery 1.2s infinite alternate;
+}
+
+.animated-green,
+.animated-red,
+.green-color {
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes animated-charging-battery {
+  0% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 0 6px hsl(92, 90%, 68%);
+  }
+}
+
+@keyframes animated-low-battery {
+  0% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 0 8px hsl(7, 89%, 46%);
+  }
+}
+
+/* liquido de bateria con graduacion de color */
+
+
+.gradient-color-red,
+.gradient-color-red::after {
+  background: var(--gradient-color-red);
+}
+
+.gradient-color-orange,
+.gradient-color-orange::after {
+  background: var(--gradient-color-orange);
+}
+
+.gradient-color-yellow,
+.gradient-color-yellow::after {
+  background: var(--gradient-color-yellow);
+}
+
+.gradient-color-green,
+.gradient-color-green::after {
+  background: var(--gradient-color-green);
+}
+
+/*=============== BREAKPOINTS ===============*/
+
+/* dispositivos pequeños */
+
+@media screen and (max-width: 320px) {
+  .battery__card {
+    zoom: .8;
+  }
+}
+
+/* dispositivos medianos */
+
+@media screen and (min-width: 430px) {
+  .battery__card {
+    width: 293px;
+  }
+}
+
+/* dispositivos largos */
+
+@media screen and (min-width: 1024px) {
+  .battery__card {
+    zoom: 1;
+  }
+}
