@@ -49,7 +49,6 @@ if encoder_reading_pin is not None:
     GPIO.setup(encoder_reading_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(encoder_reading_pin, GPIO.BOTH, callback=int0)
 
-# Resto del código Flask...
 
 # Función para calcular el porcentaje de carga de la batería
 def calculate_percentage_charge(adc_voltage):
@@ -76,7 +75,6 @@ def calculate_percentage_charge(adc_voltage):
 
     return percentage_charge
 
-# Resto del código Flask...
 
 # Endpoint para obtener el porcentaje de batería
 @app.route("/get_battery_percentage", methods=["GET"])
@@ -102,7 +100,7 @@ def get_motor_speed():
 # Renderizar la plantilla con los valores del porcentaje y la velocidad
 @app.route("/")
 def index():
-    return render_template("index.html", percentage=0, speed=0)
+    return render_template("index.html", percentage=0, speedd=0)
 
 if __name__ == "__main__":
     app.run()
