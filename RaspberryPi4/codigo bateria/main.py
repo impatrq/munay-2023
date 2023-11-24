@@ -4,7 +4,7 @@ import board
 import busio
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
-
+#para iniciar aplicacion flask
 app = Flask(_name_)
 
 # Create the I2C bus and ADC object
