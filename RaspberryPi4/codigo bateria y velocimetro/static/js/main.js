@@ -1,5 +1,3 @@
-
-
 initBattery();
 
 function initBattery() {
