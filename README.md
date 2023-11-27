@@ -61,7 +61,7 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 * 📧 lucerosoledad56@gmail.com
   
-* LinkedIn: 
+* LinkedIn: https://www.linkedin.com/in/lucero-soledad-rub%C3%AD-ordo%C3%B1ez-6a7ab429b/
 
 ### Retamar, Faustina
 
