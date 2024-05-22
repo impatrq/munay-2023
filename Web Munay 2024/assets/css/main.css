@@ -2949,6 +2949,31 @@ input, select, textarea {
 
 /* Header */
 
+		/* Estilos para la lista de secciones en el header */
+	.section-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		text-align: left;
+		float: left;
+		}
+
+		.section-list li {
+			margin-bottom: 10px; /* Espacio entre elementos */
+			}
+
+		.section-list li a {
+			text-decoration: none;
+			color: #fff; /* Cambia esto al color que prefieras */
+			padding-bottom: 5px;
+			border-bottom: 1px solid #ccc; /* Línea debajo del enlace */
+			}
+
+		.section-list li a:hover {
+			color: #ddd; /* Color al pasar el ratón */
+			border-bottom-color: #ddd; /* Cambia el color de la línea al pasar el ratón */
+			}
+
 	#header {
 		padding: 9em 0 9em 0 ;
 		background-color: #4686a0;
