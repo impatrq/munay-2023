@@ -2949,11 +2949,11 @@ input, select, textarea {
 
 /* Header */
 
-		/* Estilos para la lista de secciones en el header */
+	/* Estilos para la lista de secciones en el header */
 	.section-list {
 		list-style: none;
 		padding: 0;
-		margin: 0;
+		margin: 0 auto;
 		text-align: left;
 		float: left;
 		}
@@ -2964,14 +2964,14 @@ input, select, textarea {
 
 		.section-list li a {
 			text-decoration: none;
-			color: #fff; /* Cambia esto al color que prefieras */
+			color: #0f0904; /* Cambia esto al color que prefieras */
 			padding-bottom: 5px;
 			border-bottom: 1px solid #ccc; /* Línea debajo del enlace */
 			}
 
 		.section-list li a:hover {
 			color: #ddd; /* Color al pasar el ratón */
-			border-bottom-color: #ddd; /* Cambia el color de la línea al pasar el ratón */
+			border-bottom-color: #0f0202; /* Cambia el color de la línea al pasar el ratón */
 			}
 
 	#header {
@@ -2979,7 +2979,7 @@ input, select, textarea {
 		background-color: #4686a0;
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: fixed,							fixed,							fixed;
-		background-image: url("images/overlay2.png"), url("images/overlay3.svg"), linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2);
+		background-image: url("images/overlay2.png"), url("images/overlay3.svg"), linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 		background-position: top left,						center center,					center center;
 		background-size: auto,							cover,							cover;
 		overflow: hidden;
@@ -3068,7 +3068,8 @@ input, select, textarea {
 		}
 
 		#header h1 {
-			margin: 0;
+			text-align: center;
+			margin: 0 auto;
 		}
 
 		#header p {
