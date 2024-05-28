@@ -2009,7 +2009,7 @@ input, select, textarea {
 	}
 
 	header p {
-		color: #999;
+		color: #ffffff;
 		margin: 0 0 1.5em 0;
 		position: relative;
 	}
@@ -2964,7 +2964,7 @@ input, select, textarea {
 
 		.section-list li a {
 			text-decoration: none;
-			color: #0f0904; /* Cambia esto al color que prefieras */
+			color: #ffffff; /* Cambia esto al color que prefieras */
 			padding-bottom: 5px;
 			border-bottom: 1px solid #ccc; /* Línea debajo del enlace */
 			}
