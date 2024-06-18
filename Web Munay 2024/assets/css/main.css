@@ -23,7 +23,8 @@ section, summary, time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+	box-sizing: border-box;}
 
 	
 article, aside, details, figcaption, figure,
@@ -77,6 +78,8 @@ input, select, textarea {
 
 	html {
 		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
 	}
 
 	*, *:before, *:after {
@@ -85,6 +88,8 @@ input, select, textarea {
 
 	body {
 		background: #fff;
+		margin: 0;
+		padding: 0;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -2010,8 +2015,9 @@ input, select, textarea {
 
 	header p {
 		color: #ffffff;
-		margin: 0 0 1.5em 0;
+		margin: 0;
 		position: relative;
+		z-index: 1;
 	}
 
 	header h2 + p {
@@ -2035,7 +2041,7 @@ input, select, textarea {
 	}
 
 	header.major {
-		margin: 0 0 1em 0;
+		margin: 0;
 	}
 
 		header.major:after {
@@ -2043,7 +2049,7 @@ input, select, textarea {
 			content: '';
 			display: inline-block;
 			height: 1px;
-			margin-top: 1.5em;
+			margin-top: 0;
 			width: 6em;
 		}
 
@@ -2062,7 +2068,7 @@ input, select, textarea {
 /* Form */
 
 	form {
-		margin: 0 0 2em 0;
+		margin: 0;
 	}
 
 	label {
@@ -2353,7 +2359,7 @@ input, select, textarea {
 
 /* Image */
 
-	/* Asegúrate de que la imagen en el header sea centrada y responsiva */
+	/* Asegurate de que la imagen en el header sea centrada y responsiva */
 		.munay-responsive-image {
 			display: block;
 			margin-left: auto;
@@ -2952,19 +2958,21 @@ input, select, textarea {
 	/* Estilos para el contenedor de la navegación de secciones */
 .section-nav {
     position: absolute;
-    top:  10px;
-    left: 10px;
     background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente, ajusta según sea necesario */
     padding: 0;
     border-bottom: 2px solid #ccc; /* Línea de separación */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    z-index: 2; /* Asegura que esté por encima de otros elementos */
 }
-
 /* Estilos para la lista de secciones en el header */
 .section-list {
-    list-style: none;
+	margin: 0;
     padding: 0;
-    margin: 0;
+	list-style: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+    width: 100%;
     display: flex;
     gap: 20px; /* Espacio entre elementos */
 }
@@ -3586,6 +3594,8 @@ input, select, textarea {
 
 			html, body {
 				min-width: 320px;
+				margin: 0;
+				padding: 0;
 			}
 
 		/* Main */
