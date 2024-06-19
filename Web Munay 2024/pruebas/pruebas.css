@@ -36,8 +36,7 @@
 
 /* Ajustes para el contenedor principal del header */
 #header .inner {
-    position: relative;
-    padding-top: 50px; /* Añade espacio superior para la navegación */
+    position: absolute;
 }
 
 /* Ajustes adicionales para la responsividad */

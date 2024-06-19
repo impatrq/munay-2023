@@ -2969,7 +2969,7 @@ input, select, textarea {
     padding: 0;
 	list-style: none;
 	position: absolute;
-	top: 0;
+	top: -95px;
 	left: 0;
 	z-index: 2;
     width: 100%;
@@ -2995,8 +2995,8 @@ input, select, textarea {
 
 /* Ajustes para el contenedor principal del header */
 #header .inner {
-    position: relative;
-    padding-top: 50px; /* Añade espacio superior para la navegación */
+    position: absolute;
+    padding-top: 80px; /* Añade espacio superior para la navegación */
 }
 
 /* Ajustes adicionales para la responsividad */
