@@ -2866,15 +2866,15 @@ input, select, textarea {
 		}
 
 		.main.style2 {
-			background-color: #333;
+			background-color: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 			color: rgba(255, 255, 255, 0.75);
 			background-attachment: fixed,							fixed;
-			background-image: url("images/overlay1.png"), url("../../images/header.jpg");
+			background-image: url("images/overlay1.png"),linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 			background-size: auto,							cover;
 		}
 
 			.main.style2 a {
-				border-bottom-color: rgba(255, 255, 255, 0.5);
+				border-bottom-color: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 			}
 
 				.main.style2 a:hover {
@@ -3018,10 +3018,10 @@ input, select, textarea {
 
 	#header {
 		padding: 9em 0 9em 0 ;
-		background-color: #4686a0;
+		background-color: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: fixed,							fixed,							fixed;
-		background-image: url("images/overlay2.png"), url("images/overlay3.svg"), linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+		background-image: url("images/overlay1.png"), linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 		background-position: top left,						center center,					center center;
 		background-size: auto,							cover,							cover;
 		overflow: hidden;
@@ -3181,7 +3181,7 @@ input, select, textarea {
 			-webkit-transition: opacity 1s ease;
 			-ms-transition: opacity 1s ease;
 			transition: opacity 1s ease;
-			background-image: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+			background-image: url("images/overlay1.png") linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 			content: '';
 			height: 100%;
 			left: 0;
