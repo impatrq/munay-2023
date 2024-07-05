@@ -80,6 +80,7 @@ input, select, textarea {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
+		background:  linear-gradient(90deg, #040324 5%, #130641 30%, #F7720A);
 	}
 
 	*, *:before, *:after {
@@ -87,9 +88,10 @@ input, select, textarea {
 	}
 
 	body {
-		background: #fff;
-		margin: 0;
-		padding: 0;
+			background: linear-gradient(90deg, #040324 5%, #130641 30%, #F7720A);
+			background-size: cover;
+			background-attachment: fixed;
+		
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -2862,19 +2864,18 @@ input, select, textarea {
 	}
 
 		.main.style1 {
-			background: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+			background: linear-gradient(90deg, #040324 5%, #130641 30%, #F7720A);
 		}
 
 		.main.style2 {
-			background-color: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 			color: #fff;
 			background-attachment: fixed,							fixed;
-			background-image: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+			background-image: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 			background-size: auto,							cover;
 		}
 
 			.main.style2 a {
-				border-bottom-color: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+				border-bottom-color: #fff
 			}
 
 				.main.style2 a:hover {
@@ -3018,10 +3019,9 @@ input, select, textarea {
 
 	#header {
 		padding: 9em 0 9em 0 ;
-		background-color: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: fixed,							fixed,							fixed;
-		background-image: url("images/overlay1.png"), linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+		background-image: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 		background-position: top left,						center center,					center center;
 		background-size: auto,							cover,							cover;
 		overflow: hidden;
@@ -3030,7 +3030,7 @@ input, select, textarea {
 	}
 
 		#header a {
-			border-bottom-color: rgba(255, 255, 255, 0.5);
+			border-bottom-color: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 		}
 
 			#header a:hover {
@@ -3181,7 +3181,7 @@ input, select, textarea {
 			-webkit-transition: opacity 1s ease;
 			-ms-transition: opacity 1s ease;
 			transition: opacity 1s ease;
-			background-image: linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+			background-image: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 			content: '';
 			height: 100%;
 			left: 0;
@@ -3215,10 +3215,9 @@ input, select, textarea {
 
 	#footer {
 		padding: 6em 0 6em 0 ;
-		background-color: #4686a0;
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: fixed,							fixed,							fixed;
-		background-image: url("images/overlay1.png"), linear-gradient(45deg, #040324 5%, #130641 30%, #F7720A);
+		background-image: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 		background-position: top left,						center center,					center center;
 		background-size: auto,							cover,							cover;
 		text-align: center;
@@ -3615,6 +3614,24 @@ input, select, textarea {
 			#footer {
 				padding: 2em 1em 2em 1em ;
 			}
-
+			.next-button {
+				display: inline-block;
+				padding: 0.5em 1em;
+				margin-top: 20px;
+				background-color: #F7720A;
+				color: white;
+				text-align: center;
+				text-decoration: none;
+				border-radius: 5px;
+				border: none;
+				cursor: pointer;
+				font-size: 1em;
+				transition: background-color 0.3s ease;
+			}
+			
+			.next-button:hover {
+				background-color: #d65e07;
+			}
+			
 
 	}
