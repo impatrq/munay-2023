@@ -80,7 +80,7 @@ input, select, textarea {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
-		background:  linear-gradient(90deg, #040324 5%, #130641 30%, #F7720A);
+		background:  linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 	}
 
 	*, *:before, *:after {
@@ -88,7 +88,7 @@ input, select, textarea {
 	}
 
 	body {
-			background: linear-gradient(90deg, #040324 5%, #130641 30%, #F7720A);
+			background: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 			background-size: cover;
 			background-attachment: fixed;
 		
@@ -2864,7 +2864,7 @@ input, select, textarea {
 	}
 
 		.main.style1 {
-			background: linear-gradient(90deg, #040324 5%, #130641 30%, #F7720A);
+			background: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 		}
 
 		.main.style2 {
@@ -2970,7 +2970,7 @@ input, select, textarea {
     padding: 0;
 	list-style: none;
 	position: absolute;
-	top: -95px;
+	top: -25%;
 	left: 0;
 	z-index: 2;
     width: 100%;
