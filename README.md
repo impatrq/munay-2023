@@ -2,13 +2,13 @@
 
 # [Proyecto Munay - IMPA TRQ](https://www.instagram.com/proyecto_munay24/)
 
-<img src="/imagenes/munay logo-02 (1)1.png" height="100" width="450" />
+<img src="/Multimedia 2024/munay transparente.png" height="200" width="200" />
 
 &nbsp;
 
 | Página web | Email | Instagram |
 |------------|-------|-----------|
-|[Munay Web](https://proyectomunay.github.io/)|munayimpatrq@gmail.com|[@proyecto_munay](https://www.instagram.com/proyecto_munay24/)|
+|[Munay Web](https://proyectomunay.github.io/)|munayimpatrq@gmail.com|[@proyecto_munay24](https://www.instagram.com/proyecto_munay24/)|
 
 [Carpeta de campo](https://docs.google.com/document/d/1tWkPiszSGKhoM02buBrbb7-lkZ9xu-84cZpnnnP3k38/edit)
 
