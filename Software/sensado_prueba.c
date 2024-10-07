@@ -1,56 +1,55 @@
+#include <pigpio.h>
 #include <pthread.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "ultrasonic.h" // Include your custom library
+#include "ultrasonic.h"
 
-#define NUM_SENSORS 5  // Adjust based on how many sensors you're using
+#define NUM_SENSORS 3
 
-// Define your sensors
 Sensor sensors[NUM_SENSORS] = {
-    {0, 2},  // Sensor 1 (GPIO 17, 27)
-    {3, 4},  // Sensor 2 (GPIO 22, 23)
-    {5, 6},  // Sensor 3 (GPIO 24, 25)
-    {21, 22}, // Sensor 4 (GPIO 9, 10)
-    {23, 24}  // Sensor 5 (GPIO 11, 8)
+    {17, 27},
+    {22, 23},
+    {24, 25}
 };
 
-// Function for each sensor thread
-void *sensor_thread(void *arg) {
-    Sensor *sensor = (Sensor *)arg;
+void *measure_distances(void *arg) {
     while (1) {
-        double dist = sensor_get_distance(sensor);
-        printf("Sensor on Trigger %d detects distance: %.2f cm\n", sensor->trigger, dist);
-        sleep(1);  // Wait 1 second before next reading
+        double min_distance = 9999;
+        int closest_sensor = -1;
+
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            double distance = sensor_get_distance(&sensors[i]);
+            printf("Sensor %d mide: %.2f cm\n", i + 1, distance);
+
+            if (distance < min_distance) {
+                min_distance = distance;
+                closest_sensor = i;
+            }
+        }
+
+        printf("El sensor %d es el más cercano con %.2f cm\n\n", closest_sensor + 1, min_distance);
+        sleep(1);
     }
     return NULL;
 }
 
 int main(void) {
-    // Initialize WiringPi
-    if (wiringPiSetup() == -1) {
-        printf("WiringPi setup failed!\n");
+    if (gpioInitialise() < 0) {
+        printf("¡Error al iniciar pigpio!\n");
         return 1;
     }
 
-    // Initialize all sensors
     for (int i = 0; i < NUM_SENSORS; i++) {
         sensor_init(&sensors[i]);
     }
 
-    // Create threads for each sensor
-    pthread_t threads[NUM_SENSORS];
-    for (int i = 0; i < NUM_SENSORS; i++) {
-        if (pthread_create(&threads[i], NULL, sensor_thread, (void *)&sensors[i]) != 0) {
-            printf("Error creating thread for sensor %d\n", i + 1);
-            return 1;
-        }
+    pthread_t distance_thread;
+    if (pthread_create(&distance_thread, NULL, measure_distances, NULL) != 0) {
+        printf("Error al crear el hilo de medición\n");
+        return 1;
     }
 
-    // Wait for all threads to finish
-    for (int i = 0; i < NUM_SENSORS; i++) {
-        pthread_join(threads[i], NULL);
-    }
+    pthread_join(distance_thread, NULL);
+    gpioTerminate();
 
     return 0;
 }
