@@ -1,42 +1,56 @@
-#include <stdio.h>
 #include <pthread.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "hysrf05.h"
-#include <wiringPi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "ultrasonic.h" // Include your custom library
 
-// Configuración de pines para múltiples sensores
-#define SENSOR_1_TRIGGER_PIN 5
-#define SENSOR_1_ECHO_PIN 18
+#define NUM_SENSORS 5  // Adjust based on how many sensors you're using
 
-#define SENSOR_2_TRIGGER_PIN 6
-#define SENSOR_2_ECHO_PIN 19
+// Define your sensors
+Sensor sensors[NUM_SENSORS] = {
+    {0, 2},  // Sensor 1 (GPIO 17, 27)
+    {3, 4},  // Sensor 2 (GPIO 22, 23)
+    {5, 6},  // Sensor 3 (GPIO 24, 25)
+    {21, 22}, // Sensor 4 (GPIO 9, 10)
+    {23, 24}  // Sensor 5 (GPIO 11, 8)
+};
 
-#define SENSOR_3_TRIGGER_PIN 12
-#define SENSOR_3_ECHO_PIN 20
+// Function for each sensor thread
+void *sensor_thread(void *arg) {
+    Sensor *sensor = (Sensor *)arg;
+    while (1) {
+        double dist = sensor_get_distance(sensor);
+        printf("Sensor on Trigger %d detects distance: %.2f cm\n", sensor->trigger, dist);
+        sleep(1);  // Wait 1 second before next reading
+    }
+    return NULL;
+}
 
+int main(void) {
+    // Initialize WiringPi
+    if (wiringPiSetup() == -1) {
+        printf("WiringPi setup failed!\n");
+        return 1;
+    }
 
+    // Initialize all sensors
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        sensor_init(&sensors[i]);
+    }
 
+    // Create threads for each sensor
+    pthread_t threads[NUM_SENSORS];
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        if (pthread_create(&threads[i], NULL, sensor_thread, (void *)&sensors[i]) != 0) {
+            printf("Error creating thread for sensor %d\n", i + 1);
+            return 1;
+        }
+    }
 
-void setup() {
-    // Inicializar wiringPi
-    wiringPiSetupGpio();
+    // Wait for all threads to finish
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        pthread_join(threads[i], NULL);
+    }
 
-    // Crear instancias de los sensores
-    HY_SRF05 sensor1 = {SENSOR_1_TRIGGER_PIN, SENSOR_1_ECHO_PIN};
-    HY_SRF05 sensor2 = {SENSOR_2_TRIGGER_PIN, SENSOR_2_ECHO_PIN};
-    HY_SRF05 sensor3 = {SENSOR_3_TRIGGER_PIN, SENSOR_3_ECHO_PIN};
-
-    // Crear tareas para cada sensor
-    xTaskCreate(measure_distance1, "MeasureDistanceSensor1", 2048, &sensor1, 1, NULL);
-    xTaskCreate(measure_distance2, "MeasureDistanceSensor2", 2048, &sensor2, 1, NULL);
-    xTaskCreate(measure_distance3, "MeasureDistanceSensor3", 2048, &sensor3, 1, NULL);
-
-
-    // Iniciar el scheduler de FreeRTOS
-    vTaskStartScheduler();
-
-    // Este punto no se alcanzará nunca
-    while (1);
     return 0;
 }

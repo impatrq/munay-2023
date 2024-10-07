@@ -1,37 +1,40 @@
-#include "hysrf05.h"
-#include <wiringPi.h>
+#include <pigpio.h>
+#include <stdio.h>
 #include <unistd.h>
-#include <sys/time.h>
+#include "ultrasonic.h"
 
-// Función para inicializar el sensor
-void HY_SRF05_init(HY_SRF05 *sensor) {
-    // Configurar pines de GPIO
-    pinMode(sensor->trigger_pin, OUTPUT);
-    pinMode(sensor->echo_pin, INPUT);
-    digitalWrite(sensor->trigger_pin, LOW);
-    usleep(10000);  // Esperar 10ms para estabilizar
+// Inicializa los pines GPIO para el sensor
+void sensor_init(Sensor *sensor) {
+    gpioSetMode(sensor->trigger, PI_OUTPUT);
+    gpioSetMode(sensor->echo, PI_INPUT);
+    gpioWrite(sensor->trigger, PI_LOW);  // Establece el pin trigger en bajo inicialmente
 }
 
-// Función para medir distancia en cm
-float HY_SRF05_measure_distance(HY_SRF05 *sensor) {
-    long start_time, end_time;
-    float distance;
+// Función para calcular la distancia medida por el sensor
+double sensor_get_distance(Sensor *sensor) {
+    // Enviar un pulso de 10 microsegundos
+    gpioWrite(sensor->trigger, PI_HIGH);
+    gpioDelay(10);  // Espera de 10 microsegundos
+    gpioWrite(sensor->trigger, PI_LOW);
 
-    // Generar pulso de trigger
-    digitalWrite(sensor->trigger_pin, HIGH);
-    usleep(10);
-    digitalWrite(sensor->trigger_pin, LOW);
+    // Espera hasta que el pin de eco se ponga en alto
+    while (gpioRead(sensor->echo) == PI_LOW);
 
-    // Esperar a que el pin de echo esté alto
-    while (digitalRead(sensor->echo_pin) == LOW);
-    start_time = micros();  // Tiempo inicial
+    // Registra el tiempo de inicio (en microsegundos)
+    uint32_t start_time = gpioTick();
 
-    // Esperar a que el pin de echo esté bajo
-    while (digitalRead(sensor->echo_pin) == HIGH);
-    end_time = micros();  // Tiempo final
+    // Espera hasta que el eco se ponga en bajo (termina el pulso)
+    while (gpioRead(sensor->echo) == PI_HIGH);
 
-    // Calcular la distancia en cm
-    distance = ((end_time - start_time) / 2.0) / 29.1;
+    // Registra el tiempo de finalización
+    uint32_t stop_time = gpioTick();
+
+    // Calcula el tiempo de viaje del pulso
+    uint32_t travel_time = stop_time - start_time;
+
+    // Velocidad del sonido: 34300 cm/s, es decir, 0.034 cm/µs
+    double distance = (travel_time * 0.034) / 2;
 
     return distance;
 }
+

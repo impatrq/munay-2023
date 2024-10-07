@@ -1,18 +1,16 @@
-#ifndef HY_SRF05_H
-#define HY_SRF05_H
+#ifndef ULTRASONIC_H
+#define ULTRASONIC_H
 
-#include <stdint.h>
-
-// Estructura de configuración del sensor HY-SRF05
+// Estructura para los pines de cada sensor
 typedef struct {
-    int trigger_pin;  // Pin GPIO para el trigger
-    int echo_pin;     // Pin GPIO para el echo
-} HY_SRF05;
+    int trigger;
+    int echo;
+} Sensor;
 
-// Función para inicializar el sensor
-void HY_SRF05_init(HY_SRF05 *sensor);
+// Función para inicializar los pines GPIO del sensor
+void sensor_init(Sensor *sensor);
 
-// Función para medir distancia
-float HY_SRF05_measure_distance(HY_SRF05 *sensor);
+// Función para calcular la distancia medida por el sensor
+double sensor_get_distance(Sensor *sensor);
 
-#endif
+#endif // ULTRASONIC_H
