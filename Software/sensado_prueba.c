@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "hysrf05.h"
+#include "libs/hysrf05.h"
 
 #define NUM_SENSORS 3
 

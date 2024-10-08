@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <pthread.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "hysrf05.h"
-#include <wiringPi.h>
+#include <unistd.h>
+#include <pigpio.h>
+#include "libs/hysrf05.h"
 
 // Configuración de pines para múltiples sensores
 #define SENSOR_1_TRIGGER_PIN 5
