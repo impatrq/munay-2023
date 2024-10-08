@@ -1,7 +1,7 @@
 #include <pigpio.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "ultrasonic.h"
+#include "hysrf05.h"
 
 // Inicializa los pines GPIO para el sensor
 void sensor_init(Sensor *sensor) {

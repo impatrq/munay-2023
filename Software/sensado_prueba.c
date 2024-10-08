@@ -1,7 +1,8 @@
 #include <pigpio.h>
 #include <pthread.h>
+#include <unistd.h>
 #include <stdio.h>
-#include "ultrasonic.h"
+#include "hysrf05.h"
 
 #define NUM_SENSORS 3
 
