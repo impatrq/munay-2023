@@ -4,58 +4,55 @@
 #include <pigpio.h>
 #include "libs/hysrf05.h"
 
-// Configuración de pines para múltiples sensores
-#define SENSOR_1_TRIGGER_PIN 5
-#define SENSOR_1_ECHO_PIN 18
-
-#define SENSOR_2_TRIGGER_PIN 6
-#define SENSOR_2_ECHO_PIN 19
-
-#define SENSOR_3_TRIGGER_PIN 12
-#define SENSOR_3_ECHO_PIN 20
-
-#define SENSOR_4_TRIGGER_PIN 13
-#define SENSOR_4_ECHO_PIN 21
-
-#define SENSOR_5_TRIGGER_PIN 16
-#define SENSOR_5_ECHO_PIN 22
+Sensor sensors[NUM_SENSORS] = {
+    {14, 15},//Completa con los pines a los que se conecte el sensor 1
+    {18, 23},//Completa con los pines a los que se conecte el sensor 2
+    {24, 25},//Completa con los pines a los que se conecte el sensor 3
+    {8, 7},//Completar con los pines a los que se conecte el sensor 4
+    {12, 16} //Completa con los pines a los que se conecte el sensor 5
+};
 
 
-// Función de tarea para medir la distancia de un sensor
-void task_measure_distance(void *pvParameters) {
-    HY_SRF05 *sensor = (HY_SRF05 *)pvParameters;
-
-    HY_SRF05_init(sensor);
-
+void *measure_distances(void *arg) {
     while (1) {
-        float distance = HY_SRF05_measure_distance(sensor);
-        printf("Distancia medida en el sensor con trigger pin %d: %.2f cm\n", sensor->trigger_pin, distance);
-        vTaskDelay(pdMS_TO_TICKS(100));  // Esperar 100 ms antes de la próxima medición
+        double min_distance = 9999;
+        int closest_sensor = -1;
+
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            double distance = sensor_get_distance(&sensors[i]);
+            printf("Sensor %d mide: %.2f cm\n", i + 1, distance);
+
+            if (distance < min_distance) {
+                min_distance = distance;
+                closest_sensor = i;
+            }
+        }
+        sleep(1);
     }
+    return NULL;
 }
 
 int main() {
-    // Inicializar wiringPi
-    wiringPiSetupGpio();
+    
+    if (gpioInitialise() < 0) {
+        printf("¡Error al iniciar pigpio!\n");
+        return 1;
+    }
 
-    // Crear instancias de los sensores
-    HY_SRF05 sensor1 = {SENSOR_1_TRIGGER_PIN, SENSOR_1_ECHO_PIN};
-    HY_SRF05 sensor2 = {SENSOR_2_TRIGGER_PIN, SENSOR_2_ECHO_PIN};
-    HY_SRF05 sensor3 = {SENSOR_3_TRIGGER_PIN, SENSOR_3_ECHO_PIN};
-    HY_SRF05 sensor4 = {SENSOR_4_TRIGGER_PIN, SENSOR_4_ECHO_PIN};
-    HY_SRF05 sensor5 = {SENSOR_5_TRIGGER_PIN, SENSOR_5_ECHO_PIN};
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        sensor_init(&sensors[i]);
+    }
 
-    // Crear tareas para cada sensor
-    xTaskCreate(task_measure_distance, "MeasureDistanceSensor1", 2048, &sensor1, 1, NULL);
-    xTaskCreate(task_measure_distance, "MeasureDistanceSensor2", 2048, &sensor2, 1, NULL);
-    xTaskCreate(task_measure_distance, "MeasureDistanceSensor3", 2048, &sensor3, 1, NULL);
-    xTaskCreate(task_measure_distance, "MeasureDistanceSensor4", 2048, &sensor4, 1, NULL);
-    xTaskCreate(task_measure_distance, "MeasureDistanceSensor5", 2048, &sensor5, 1, NULL);
+    pthread_t distance_thread;
+    if (pthread_create(&distance_thread, NULL, measure_distances, NULL) != 0) {
+        printf("Error al crear el hilo de medición\n");
+        return 1;
+    }
 
-    // Iniciar el scheduler de FreeRTOS
-    vTaskStartScheduler();
+    pthread_join(distance_thread, NULL);
+    /*agregar variable en la que se guarde el valor mas bajo medido, despues agregar un actuador que 
+    varía la cantidad de freno en funcion de qué tan cerca esté el objeto */
+    gpioTerminate();
 
-    // Este punto no se alcanzará nunca
-    while (1);
     return 0;
 }
