@@ -1,5 +1,5 @@
-#ifndef ULTRASONIC_H
-#define ULTRASONIC_H
+#ifndef HYSRF05_H
+#define HYSRF05_H
 
 // Estructura para los pines de cada sensor
 typedef struct {
