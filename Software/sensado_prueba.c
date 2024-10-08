@@ -7,8 +7,8 @@
 #define NUM_SENSORS 3
 
 Sensor sensors[NUM_SENSORS] = {
-    {17, 27},
-    {22, 23},
+    {14, 15},
+    {18, 23},
     {24, 25}
 };
 
