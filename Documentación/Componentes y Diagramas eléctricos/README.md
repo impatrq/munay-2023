@@ -11,3 +11,5 @@
 - Motor Alza cristales, 12v
 
 - Controladores Kelly
+
+- Baterías 
