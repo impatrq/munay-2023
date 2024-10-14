@@ -9,12 +9,10 @@ Sensor sensors[NUM_SENSORS] = {
     {14, 15}, // Pines sensor 1
     {18, 23}, // Pines sensor 2
     {24, 25}, // Pines sensor 3
-    {8, 7},   // Pines sensor 4
-    {12, 16}  // Pines sensor 5
 };
 
 // Pines del motor
-#define MOTOR_PIN_1 17  // GPIO para controlar el motor
+#define MOTOR_PIN_1 8  // GPIO para controlar el motor
 
 // Define la distancia límite (5 metros)
 #define MAX_DISTANCE 500
