@@ -4,6 +4,8 @@
 #include <pigpio.h>
 #include "libs/hysrf05.h"
 
+
+
 Sensor sensors[NUM_SENSORS] = {
     {14, 15},//Completa con los pines a los que se conecte el sensor 1
     {18, 23},//Completa con los pines a los que se conecte el sensor 2
@@ -17,6 +19,7 @@ void *measure_distances(void *arg) {
     while (1) {
         double min_distance = 9999;
         int closest_sensor = -1;
+
 
         for (int i = 0; i < NUM_SENSORS; i++) {
             double distance = sensor_get_distance(&sensors[i]);

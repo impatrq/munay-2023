@@ -2,12 +2,14 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
-#include "libs/hysrf05.h"  // Suponiendo que ya tienes esta librería para los sensores
+#include "libs/hysrf05.h"  
+
+#define NUM_SENSORS 3
 
 // Definir los sensores
 Sensor sensors[NUM_SENSORS] = {
     {14, 15}, // Pines sensor 1
-    {18, 23}, // Pines sensor 2
+    {18, 23}, // Pines sensor 2 
     {24, 25}, // Pines sensor 3
 };
 
@@ -27,7 +29,7 @@ int motor_active = 0;  // 0 = reposo, 1 = frenando
 // Función para accionar el freno
 void activate_brake(double time_on) {
     gpioWrite(MOTOR_PIN_1, PI_HIGH);  // Activa el motor
-    usleep(time_on * 1000000);        // Mantiene el motor activo por el tiempo calculado
+    usleep(time_on * 1000000000);        // Mantiene el motor activo por el tiempo calculado
     gpioWrite(MOTOR_PIN_1, PI_LOW);   // Detiene el motor
 }
 
