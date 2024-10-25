@@ -24,6 +24,33 @@ size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
     return size * nmemb;
 }
 
+// Función para obtener el perfil de frenado
+char *get_braking_profile() {
+    CURL *curl;
+    CURLcode res;
+    static char response[100] = "";  // Almacena la respuesta del servidor
+
+    curl = curl_easy_init();
+    if(curl) {
+        // Configura cURL para hacer una solicitud GET
+        curl_easy_setopt(curl, CURLOPT_URL, URL);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+
+        // Realiza la solicitud
+        res = curl_easy_perform(curl);
+
+        // Verifica si ocurrió un error
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        }
+        // Libera recursos de cURL
+        curl_easy_cleanup(curl);
+    }
+
+    return response;  // Devuelve la respuesta como una cadena
+}
+
 // Pines del motor
 #define MOTOR_PIN_1 8  // GPIO para controlar el motor
 
