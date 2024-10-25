@@ -1,8 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
 #include "libs/hysrf05.h"  
+
+#define URL "http://localhost:5000/get_braking_profile"
 
 #define NUM_SENSORS 3
 
@@ -12,6 +17,12 @@ Sensor sensors[NUM_SENSORS] = {
     {18, 23}, // Pines sensor 2 
     {24, 25}, // Pines sensor 3
 };
+
+// Función de escritura para almacenar la respuesta de cURL
+size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
+    strcat(data, (char *)ptr);
+    return size * nmemb;
+}
 
 // Pines del motor
 #define MOTOR_PIN_1 8  // GPIO para controlar el motor
