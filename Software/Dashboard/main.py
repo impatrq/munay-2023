@@ -90,6 +90,11 @@ def set_braking_profile():
     else:
         return "Perfil no válido", 400
 
+# Ruta para obtener el perfil de frenado actual (opcional)
+@app.route('/get_braking_profile')
+def get_braking_profile():
+    return jsonify(profile=braking_profile)
+
 
 # Endpoint para obtener el porcentaje de batería
 @app.route("/get_battery_percentage", methods=["GET"])
