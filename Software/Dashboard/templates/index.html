@@ -166,6 +166,16 @@
   <button onclick="setBrakingProfile('snow')">Nieve</button>
 </div>
 
+ <!-- Script para enviar la selección de perfil de frenado -->
+ <script>
+  function setBrakingProfile(profile) {
+    fetch(`/set_braking_profile?profile=${profile}`)
+      .then(response => response.text())
+      .then(data => console.log("Perfil de frenado:", data))
+      .catch(error => console.error("Error:", error));
+  }
+</script>
+
 
 <!--=============== BATTERY ===============-->
 <section class="battery">
