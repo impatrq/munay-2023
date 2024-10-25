@@ -75,6 +75,21 @@ def calculate_percentage_charge(adc_voltage):
 
     return percentage_charge
 
+# Variable global para el perfil de frenado
+braking_profile = "dry"  # Valor predeterminado
+
+# Ruta para cambiar el perfil de frenado
+@app.route('/set_braking_profile')
+def set_braking_profile():
+    global braking_profile
+    profile = request.args.get('profile')
+    
+    if profile in ["dry", "rain", "snow"]:
+        braking_profile = profile
+        return f"Perfil de frenado cambiado a: {braking_profile}"
+    else:
+        return "Perfil no válido", 400
+
 
 # Endpoint para obtener el porcentaje de batería
 @app.route("/get_battery_percentage", methods=["GET"])
