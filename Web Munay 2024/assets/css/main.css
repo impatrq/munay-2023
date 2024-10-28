@@ -3328,6 +3328,34 @@ input, select, textarea {
 					padding: 0;
 				}
 
+
+
+
+
+/* Modificado por Munay */
+
+	
+#egg a .eegg {
+		
+	text-decoration: none !important;
+}
+
+
+#navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #333;
+	padding: 10px 0;
+	z-index: 1000;
+}
+
+
+
+
+
+
 /* XLarge */
 
 	@media screen and (max-width: 1680px) {
@@ -3428,6 +3456,10 @@ input, select, textarea {
 
 			#header {
 				padding: 8em 3em 8em 3em ;
+			}
+
+			#navbar {
+				text-align: center;
 			}
 
 		/* Footer */
@@ -3636,18 +3668,5 @@ input, select, textarea {
 
 	}
 
-	#egg a .eegg {
-		
-		text-decoration: none !important;
-	}
 
-
-	#navbar {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		background-color: #333;
-		padding: 10px 0;
-		z-index: 1000;
-	}
+	
