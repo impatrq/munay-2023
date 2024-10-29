@@ -2,7 +2,7 @@
 
 # [Proyecto Munay - IMPA TRQ](https://www.instagram.com/proyecto_munay24/)
 
-<img src="/Multimedia 2024/munay logo png.png" height="400" width="400" />
+<img src="Multimedia 2024/Diseños/munay transparente.png" height="400" width="400" />
 
 &nbsp;
 
