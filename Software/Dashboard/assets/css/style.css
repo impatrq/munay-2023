@@ -13,6 +13,10 @@ body {
   background: rgb(88, 132, 145) !important;
   color: white !important;
   font-family: 'Open Sans', sans;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .gauge::before {
@@ -337,7 +341,38 @@ body {
   animation-duration: 25s, 51s;
   animation-timing-function: linear, linear;
   animation-delay: 12s, 37s;
+
+  /* Estilo para acomodar con Flexbox */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
+
+.datetime {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+#dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.battery .speedmeter {
+  display: flex;
+  align-items: center;
+}
+
+.button-container{
+  padding: 10px;
+}
+
 @keyframes startUp {
   0% {
     transform: rotate(-30deg);
