@@ -127,4 +127,4 @@ def index():
     return render_template("index.html", percentage=0, speedd=0)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host = "0.0.0.0")
