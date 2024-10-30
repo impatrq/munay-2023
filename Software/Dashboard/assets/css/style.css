@@ -10,8 +10,8 @@ html {
   font-size: 30px;
 }
 body {
-  background: rgb(88, 132, 145);
-  color: white;
+  background: rgb(88, 132, 145) !important;
+  color: white !important;
   font-family: 'Open Sans', sans;
 }
 
@@ -169,7 +169,7 @@ body {
 .gauge .digit:nth-of-type(11) .label {
   transform: rotate(-270deg);
 }
-.gauge .digit .label {
+#dashboard .gauge .digit .label {
   position:absolute;
   font-family: 'Changa One', cursive;
   font-style: italic;
