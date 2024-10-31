@@ -2865,6 +2865,7 @@ input, select, textarea {
 
 		.main.style1 {
 			background: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
+			color: #fff;
 		}
 
 		.main.style2 {
