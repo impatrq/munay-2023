@@ -2874,6 +2874,7 @@ input, select, textarea {
 			/*agrego color a la fuente que quedaba gris*/
 			color: #fff;
 			background: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
+			color: #fff;
 		}
 
 		.main.style2 {
@@ -3355,7 +3356,7 @@ input, select, textarea {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: #333;
+	background-color: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 	padding: 10px 0;
 	z-index: 1000;
 }
