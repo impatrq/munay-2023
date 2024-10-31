@@ -1,13 +1,11 @@
-/* Estilos para el contenedor de la navegación de secciones */
-.section-nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente, ajusta según sea necesario */
-    padding: 10px;
-    border-bottom: 2px solid #ccc; /* Línea de separación */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+
+
+/* Descripcion*/
+#subtitulo {
+    padding: auto;
+    color: #fff;
 }
+
 
 /* Estilos para la lista de secciones en el header */
 .section-list {

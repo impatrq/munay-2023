@@ -74,6 +74,13 @@ input, select, textarea {
 	appearance: none;
 }
 
+/* Descripcion*/
+#subtitulo {
+    padding-top: 100px ;
+    color: #fff;
+	font-size: 2em;
+}
+
 /* Basic */
 
 	html {
@@ -2864,6 +2871,8 @@ input, select, textarea {
 	}
 
 		.main.style1 {
+			/*agrego color a la fuente que quedaba gris*/
+			color: #fff;
 			background: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
 		}
 
@@ -3458,9 +3467,6 @@ input, select, textarea {
 				padding: 8em 3em 8em 3em ;
 			}
 
-			#navbar {
-				text-align: center;
-			}
 
 		/* Footer */
 
@@ -3471,6 +3477,7 @@ input, select, textarea {
 		/* One */
 
 			#one {
+
 				text-align: center;
 			}
 
@@ -3507,6 +3514,7 @@ input, select, textarea {
 			h4 {
 				font-size: 1em;
 			}
+
 
 		/* List */
 
