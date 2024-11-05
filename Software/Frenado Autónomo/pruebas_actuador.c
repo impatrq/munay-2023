@@ -1,8 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
 #include "libs/hysrf05.h"  
+
+#define URL "http://localhost:5000/get_braking_profile"
 
 #define NUM_SENSORS 3
 
@@ -12,6 +17,39 @@ Sensor sensors[NUM_SENSORS] = {
     {18, 23}, // Pines sensor 2 
     {24, 25}, // Pines sensor 3
 };
+
+// Función de escritura para almacenar la respuesta de cURL
+size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
+    strcat(data, (char *)ptr);
+    return size * nmemb;
+}
+
+// Función para obtener el perfil de frenado
+char *get_braking_profile() {
+    CURL *curl;
+    CURLcode res;
+    static char response[100] = "";  // Almacena la respuesta del servidor
+
+    curl = curl_easy_init();
+    if(curl) {
+        // Configura cURL para hacer una solicitud GET
+        curl_easy_setopt(curl, CURLOPT_URL, URL);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+
+        // Realiza la solicitud
+        res = curl_easy_perform(curl);
+
+        // Verifica si ocurrió un error
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        }
+        // Libera recursos de cURL
+        curl_easy_cleanup(curl);
+    }
+
+    return response;  // Devuelve la respuesta como una cadena
+}
 
 // Pines del motor
 #define MOTOR_PIN_1 8  // GPIO para controlar el motor
@@ -75,46 +113,67 @@ void *measure_distance(void *arg) {
 }
 
 int main() {
-    if (gpioInitialise() < 0) {
-        printf("¡Error al iniciar pigpio!\n");
-        return 1;
-    }
+    char *profile = get_braking_profile();
+    
+    // Procesa la respuesta y usa el perfil de frenado
+    printf("Perfil de frenado actual: %s\n", profile);
 
-    // Inicializar los sensores
-    for (int i = 0; i < NUM_SENSORS; i++) {
-        sensor_init(&sensors[i]);
-    }
-
-    // Inicializar el pin del motor
-    gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
-
-    // Inicializar el mutex
-    pthread_mutex_init(&distance_mutex, NULL);
-
-    // Crear hilos de medición para cada sensor
-    pthread_t sensor_threads[NUM_SENSORS];
-    int sensor_indexes[NUM_SENSORS];  // Almacena los índices de los sensores
-    for (int i = 0; i < NUM_SENSORS; i++) {
-        sensor_indexes[i] = i;
-        if (pthread_create(&sensor_threads[i], NULL, measure_distance, &sensor_indexes[i]) != 0) {
-            printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+    // Aquí podrías añadir lógica para usar el perfil en el código de frenado
+    if (strstr(profile, "dry")) {
+        printf("Modo de frenado en condiciones secas.\n");
+        // Código para modo seco
+        if (gpioInitialise() < 0) {
+            printf("¡Error al iniciar pigpio!\n");
             return 1;
         }
+
+        // Inicializar los sensores
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            sensor_init(&sensors[i]);
+        }
+
+        // Inicializar el pin del motor
+        gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
+
+        // Inicializar el mutex
+        pthread_mutex_init(&distance_mutex, NULL);
+
+        // Crear hilos de medición para cada sensor
+        pthread_t sensor_threads[NUM_SENSORS];
+        int sensor_indexes[NUM_SENSORS];  // Almacena los índices de los sensores
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            sensor_indexes[i] = i;
+            if (pthread_create(&sensor_threads[i], NULL, measure_distance, &sensor_indexes[i]) != 0) {
+                printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+                return 1;
+            }
+        }
+
+        // Crear el hilo para controlar el motor
+        pthread_t motor_thread;
+        if (pthread_create(&motor_thread, NULL, control_motor, NULL) != 0) {
+            printf("Error al crear el hilo de control del motor\n");
+            return 1;
+        }
+
+        // Esperar a que los hilos terminen (aunque no lo harán, ya que corren indefinidamente)
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            pthread_join(sensor_threads[i], NULL);
+        }
+        pthread_join(motor_thread, NULL);
+
+
+    } else if (strstr(profile, "rain")) {
+        printf("Modo de frenado en condiciones de lluvia.\n");
+        // Código para modo lluvia
+    } else if (strstr(profile, "snow")) {
+        printf("Modo de frenado en condiciones de nieve.\n");
+        // Código para modo nieve
+    } else {
+        printf("Modo de frenado desconocido.\n");
     }
 
-    // Crear el hilo para controlar el motor
-    pthread_t motor_thread;
-    if (pthread_create(&motor_thread, NULL, control_motor, NULL) != 0) {
-        printf("Error al crear el hilo de control del motor\n");
-        return 1;
-    }
-
-    // Esperar a que los hilos terminen (aunque no lo harán, ya que corren indefinidamente)
-    for (int i = 0; i < NUM_SENSORS; i++) {
-        pthread_join(sensor_threads[i], NULL);
-    }
-    pthread_join(motor_thread, NULL);
-
+    
     gpioTerminate();  // Finalizar pigpio
     pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
 
