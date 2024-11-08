@@ -34,7 +34,7 @@ void activate_brake(double time_on) {
 }
 
 // Función para controlar el motor
-void control_motor() {
+void* control_motor(void* arg) {
     while (1) {
         pthread_mutex_lock(&distance_mutex);  // Bloquear acceso a min_distance
         double current_distance = min_distance;
@@ -52,6 +52,7 @@ void control_motor() {
         }
 
         usleep(100000);  // Pequeño retardo para evitar sobrecarga de CPU (100ms)
+        return NULL;
     }
 }
 
