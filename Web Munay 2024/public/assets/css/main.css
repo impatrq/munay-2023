@@ -3351,12 +3351,10 @@ input, select, textarea {
 }
 
 
-#navbar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
+#navbar2 {
+
+	
+	background-color: linear-gradient(90deg, rgb(10,0,106) 0%, rgb(217,13,13) 70%, rgb(247,114,10) 100%);
 	padding: 10px 0;
 	z-index: 1000;
 }
