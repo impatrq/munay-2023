@@ -2429,7 +2429,7 @@ input, select, textarea {
 		}
 
 		.image.left, .image.right {
-			max-width: 40%;
+			max-width: 20%;
 		}
 
 			.image.left img, .image.right img {
@@ -2874,17 +2874,15 @@ input, select, textarea {
 			/*agrego color a la fuente que quedaba gris*/
 			color: #fff;
 			background: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
-			color: #fff;
+
 		}
 
 		.main.style2 {
 			color: #fff;
-			background-attachment: fixed,							fixed;
-			background-image: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
-			background-size: auto,							cover;
+			background: linear-gradient(90deg, rgba(247,114,10,1) 0%,  rgba(217,13,13,1) 70%, rgba(10,0,106,1) 100% );
 		}
 
-			.main.style2 a {
+			/*.main.style2 a {
 				border-bottom-color: #fff
 			}
 
@@ -2962,7 +2960,7 @@ input, select, textarea {
 
 			.main.style2 .icon.major {
 				color: #ffffff;
-			}
+			}*/
 
 /* Header */
 
