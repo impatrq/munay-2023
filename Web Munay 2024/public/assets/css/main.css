@@ -3222,12 +3222,9 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		padding: 6em 0 6em 0 ;
+		padding: 2em 0 2em 0 ;
 		color: #fff;
-		background-attachment: fixed,							fixed,							fixed;
-		background-image: linear-gradient(90deg, rgba(10,0,106,1) 0%, rgba(217,13,13,1) 70%, rgba(247,114,10,1) 100%);
-		background-position: top left,						center center,					center center;
-		background-size: auto,							cover,							cover;
+		background-color: rgb(10,0,106);						cover,							cover;
 		text-align: center;
 	}
 
@@ -3238,7 +3235,7 @@ input, select, textarea {
 			#footer a:hover {
 				color: #ffffff;
 			}
-*/
+
 		#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
 			color: #ffffff;
 		}
@@ -3302,7 +3299,7 @@ input, select, textarea {
 				#footer .button.primary:active {
 					background-color: rgba(255, 255, 255, 0.25) !important;
 				}
-
+*/
 		#footer ul.major-icons li .icon {
 			border-color: #ffffff;
 		}
@@ -3417,7 +3414,7 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				padding: 4em 0 4em 0 ;
+				padding: 2em 0 2em 0 ;
 				background-attachment: scroll;
 			}
 
@@ -3455,7 +3452,7 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				padding: 5em 3em 5em 3em ;
+				padding: 2em 0em 2em 0em ;
 			}
 
 		/* One */
@@ -3552,7 +3549,7 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				padding: 3em 1.5em 3em 1.5em ;
+				padding: 2em 0em 2em 0em ;
 			}
 
 	}
