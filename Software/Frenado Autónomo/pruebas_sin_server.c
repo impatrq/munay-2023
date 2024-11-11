@@ -52,13 +52,15 @@ void* control_motor(void* arg) {
         }
 
         usleep(100000);  // Pequeño retardo para evitar sobrecarga de CPU (100ms)
-        return NULL;
     }
+    return NULL;
 }
 
 // Función de cada hilo de medición
 void *measure_distance(void *arg) {
     int sensor_index = *(int *)arg;
+    free (arg); //libera la memoria asignada para el indice
+
     while (1) {
         double distance = sensor_get_distance(&sensors[sensor_index]);
 
@@ -94,10 +96,10 @@ int main() {
 
     // Crear hilos de medición para cada sensor
     pthread_t sensor_threads[NUM_SENSORS];
-    int sensor_indexes[NUM_SENSORS];  // Almacena los índices de los sensores
     for (int i = 0; i < NUM_SENSORS; i++) {
-        sensor_indexes[i] = i;
-        if (pthread_create(&sensor_threads[i], NULL, measure_distance, &sensor_indexes[i]) != 0) {
+        int *sensor_index = malloc(sizeof(int));  // Crear copia independiente en memoria dinámica
+        *sensor_index = i;
+        if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
             printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
             return 1;
         }
