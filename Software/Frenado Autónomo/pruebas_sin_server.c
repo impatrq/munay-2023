@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
+#include <stdlib.h>       
 #include "libs/hysrf05.h"  
 
 #define NUM_SENSORS 3
@@ -30,7 +30,7 @@ int motor_active = 0;  // 0 = reposo, 1 = frenando
 // Función para accionar el freno
 void activate_brake(double time_on) {
     gpioWrite(MOTOR_PIN_1, PI_HIGH);  // Activa el motor
-    usleep(time_on * 1000000000);        // Mantiene el motor activo por el tiempo calculado
+    usleep(time_on * 1000000);        // Mantiene el motor activo por el tiempo calculado
     gpioWrite(MOTOR_PIN_1, PI_LOW);   // Detiene el motor
 }
 
@@ -60,10 +60,11 @@ void* control_motor(void* arg) {
 // Función de cada hilo de medición
 void *measure_distance(void *arg) {
     int sensor_index = *(int *)arg;
-    free (arg); //libera la memoria asignada para el indice
+    free(arg);  // Liberar la memoria asignada para el índice
 
     while (1) {
         double distance = sensor_get_distance(&sensors[sensor_index]);
+        printf("Sensor %d: distancia medida = %.2f cm\n", sensor_index + 1, distance); // Agregar impresión para verificar medición de cada sensor
 
         // Bloquear mutex y actualizar la distancia mínima
         pthread_mutex_lock(&distance_mutex);
