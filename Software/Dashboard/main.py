@@ -1,6 +1,10 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import RPi.GPIO as GPIO
 import time
+import board
+import busio
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
 speed=0
 
 app = Flask(__name__)
@@ -90,6 +94,11 @@ def set_braking_profile():
     else:
         return "Perfil no válido", 400
 
+# Ruta para obtener el perfil de frenado actual (opcional)
+@app.route('/get_braking_profile')
+def get_braking_profile():
+    return jsonify(profile=braking_profile)
+
 
 # Endpoint para obtener el porcentaje de batería
 @app.route("/get_battery_percentage", methods=["GET"])
@@ -118,4 +127,4 @@ def index():
     return render_template("index.html", percentage=0, speedd=0)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host = "0.0.0.0")
