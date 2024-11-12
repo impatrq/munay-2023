@@ -123,13 +123,17 @@ int main() {
         return 1;
     }
 
-    // Inicializar el mutex
+        // Inicializar el mutex
     pthread_mutex_init(&distance_mutex, NULL);
 
-    // Crear hilos de medición para cada sensor
+    // Declarar los hilos
     pthread_t sensor_threads[NUM_SENSORS];
+    pthread_t motor_thread;
+    pthread_t reset_thread;
+
+    // Crear hilos de medición para cada sensor
     for (int i = 0; i < NUM_SENSORS; i++) {
-        int *sensor_index = malloc(sizeof(int));  // Crear copia independiente en memoria dinámica
+        int *sensor_index = malloc(sizeof(int));
         *sensor_index = i;
         if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
             printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
@@ -138,25 +142,23 @@ int main() {
     }
 
     // Crear el hilo para controlar el motor
-    pthread_t motor_thread;
     if (pthread_create(&motor_thread, NULL, control_motor, NULL) != 0) {
         printf("Error al crear el hilo de control del motor\n");
         return 1;
     }
 
     // Crear el hilo para reiniciar la distancia mínima
-    pthread_t reset_thread;
-if (pthread_create(&reset_thread, NULL, reset_min_distance, NULL) != 0) {
-    printf("Error al crear el hilo de reinicio de distancia mínima\n");
-    return 1;
-}
-
+    if (pthread_create(&reset_thread, NULL, reset_min_distance, NULL) != 0) {
+        printf("Error al crear el hilo de reinicio de distancia mínima\n");
+        return 1;
+    }
 
     // Esperar a que los hilos terminen (aunque no lo harán, ya que corren indefinidamente)
     for (int i = 0; i < NUM_SENSORS; i++) {
         pthread_join(sensor_threads[i], NULL);
     }
     pthread_join(motor_thread, NULL);
+    pthread_join(reset_thread, NULL);
 
     gpioTerminate();  // Finalizar pigpio
     pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
