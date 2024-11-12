@@ -18,7 +18,7 @@ Sensor sensors[NUM_SENSORS] = {
 #define MOTOR_PIN_1 8  // GPIO para controlar el motor
 
 // Define la distancia límite (5 metros)
-#define MAX_DISTANCE 500
+#define MAX_DISTANCE 450
 
 // Variables compartidas
 double min_distance = 9999;  // Almacena la distancia mínima medida
@@ -45,11 +45,11 @@ void* control_motor(void* arg) {
 
         printf("Distancia actual: %.2f cm, Estado del motor: %d\n", current_distance, motor_active);
 
-        if (current_distance < MAX_DISTANCE && motor_active == 0) {
+        if (current_distance < MAX_DISTANCE) {
             // Si el objeto está dentro del rango y el motor está inactivo
             printf("Activando el motor. Distancia: %.2f cm\n", current_distance);
             double time_on = (MAX_DISTANCE - current_distance) / MAX_DISTANCE * 2; // Tiempo de activación proporcional a la distancia
-            activate_brake(time_on); // Activa el freno
+            gpioWrite(MOTOR_PIN_1, PI_HIGH); // Encender el motor
             motor_active = 1; // Cambia estado a "frenando"
         } else if (current_distance >= MAX_DISTANCE && motor_active == 1) {
             // Si el objeto está fuera del rango y el freno está activado, detener el motor
@@ -75,7 +75,7 @@ void *measure_distance(void *arg) {
 
         //bloquear mutex y modificar distancia minima
         pthread_mutex_lock(&distance_mutex);
-        if (distance < min_distance) {
+        if (distance < min_distance || min_distance == 9999) {
             min_distance = distance;
             printf("Nueva distancia mínima: %.2f cm\n", min_distance);
         }
@@ -87,6 +87,8 @@ void *measure_distance(void *arg) {
     return NULL;
 }
 
+
+
 int main() {
     if (gpioInitialise() < 0) {
         printf("¡Error al iniciar pigpio!\n");
@@ -95,8 +97,13 @@ int main() {
 
     // Inicializar los sensores
     for (int i = 0; i < NUM_SENSORS; i++) {
-        sensor_init(&sensors[i]);
+    int *sensor_index = malloc(sizeof(int));
+    *sensor_index = i;
+    if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
+        printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+        return 1;
     }
+}
 
     // Inicializar el pin del motor
     gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
