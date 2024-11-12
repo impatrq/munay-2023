@@ -29,30 +29,36 @@ int motor_active = 0;  // 0 = reposo, 1 = frenando
 
 // Función para accionar el freno
 void activate_brake(double time_on) {
-    gpioWrite(MOTOR_PIN_1, PI_HIGH);  // Activa el motor
-    usleep(time_on * 1000000);        // Mantiene el motor activo por el tiempo calculado
-    gpioWrite(MOTOR_PIN_1, PI_LOW);   // Detiene el motor
+    printf("Activando freno por %.2f segundos\n", time_on);
+    gpioWrite(MOTOR_PIN_1, PI_HIGH); // Encender el motor
+    usleep(time_on * 1000000); // Mantener el motor activado por el tiempo especificado
+    gpioWrite(MOTOR_PIN_1, PI_LOW);
+    printf("Freno desactivado\n"); // Apagar el motor
 }
 
 // Función para controlar el motor
 void* control_motor(void* arg) {
     while (1) {
-        pthread_mutex_lock(&distance_mutex);  // Bloquear acceso a min_distance
+        pthread_mutex_lock(&distance_mutex); //bloquear acceso a variable de distancia mínima
         double current_distance = min_distance;
-        pthread_mutex_unlock(&distance_mutex);  // Desbloquear acceso
+        pthread_mutex_unlock(&distance_mutex); //desbloquear acceso 
+
+        printf("Distancia actual: %.2f cm, Estado del motor: %d\n", current_distance, motor_active);
 
         if (current_distance < MAX_DISTANCE && motor_active == 0) {
             // Si el objeto está dentro del rango y el motor está inactivo
-            double time_on = (MAX_DISTANCE - current_distance) / MAX_DISTANCE * 2;  // Tiempo de activación del freno
-            activate_brake(time_on);  // Activa el freno
-            motor_active = 1;  // Cambia el estado a "frenando"
+            printf("Activando el motor. Distancia: %.2f cm\n", current_distance);
+            double time_on = (MAX_DISTANCE - current_distance) / MAX_DISTANCE * 2; // Tiempo de activación proporcional a la distancia
+            activate_brake(time_on); // Activa el freno
+            motor_active = 1; // Cambia estado a "frenando"
         } else if (current_distance >= MAX_DISTANCE && motor_active == 1) {
             // Si el objeto está fuera del rango y el freno está activado, detener el motor
-            gpioWrite(MOTOR_PIN_1, PI_LOW);  // Detener el motor
-            motor_active = 0;  // Cambiar el estado a "reposo"
+            printf("Desactivando el motor. Distancia: %.2f cm\n", current_distance);
+            gpioWrite(MOTOR_PIN_1, PI_LOW); // Detener el motor
+            motor_active = 0; // Cambia estado a "reposo"
         }
 
-        usleep(100000);  // Pequeño retardo para evitar sobrecarga de CPU (100ms)
+        usleep(100000); // Pequeño retardo para evitar sobrecarga de CPU (100ms)
     }
     return NULL;
 }
@@ -60,20 +66,22 @@ void* control_motor(void* arg) {
 // Función de cada hilo de medición
 void *measure_distance(void *arg) {
     int sensor_index = *(int *)arg;
-    free(arg);  // Liberar la memoria asignada para el índice
+    free(arg);
 
     while (1) {
         double distance = sensor_get_distance(&sensors[sensor_index]);
-        printf("Sensor %d: distancia medida = %.2f cm\n", sensor_index + 1, distance); // Agregar impresión para verificar medición de cada sensor
+        printf("Sensor %d: distancia medida = %.2f cm\n", sensor_index + 1, distance);
 
-        // Bloquear mutex y actualizar la distancia mínima
+
+        //bloquear mutex y modificar distancia minima
         pthread_mutex_lock(&distance_mutex);
         if (distance < min_distance) {
             min_distance = distance;
+            printf("Nueva distancia mínima: %.2f cm\n", min_distance);
         }
         pthread_mutex_unlock(&distance_mutex);
 
-        usleep(500000);  // Espera 500 ms antes de la siguiente medición
+        usleep(500000);
     }
 
     return NULL;
@@ -92,6 +100,11 @@ int main() {
 
     // Inicializar el pin del motor
     gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
+
+    if (gpioGetMode(MOTOR_PIN_1) != PI_OUTPUT) {
+        printf("Error al configurar el pin del motor (GPIO %d) como salida\n", MOTOR_PIN_1);
+        return 1;
+    }
 
     // Inicializar el mutex
     pthread_mutex_init(&distance_mutex, NULL);
