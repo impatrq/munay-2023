@@ -2,13 +2,13 @@
 
 # [Proyecto Munay - IMPA TRQ](https://www.instagram.com/proyecto_munay24/)
 
-<img src="/Multimedia 2024/munay logo png.png" height="400" width="400" />
+<img src="Multimedia 2024/Diseños/munay transparente.png" height="400" width="400" />
 
 &nbsp;
 
 | Página web | Email | Instagram |
 |------------|-------|-----------|
-|[Munay Web](https://proyectomunay.github.io/)|munayimpatrq@gmail.com|[@proyecto_munay24](https://www.instagram.com/proyecto_munay24/)|
+|[Munay Web](https://munay-impa.web.app/)|munayimpatrq@gmail.com|[@proyecto_munay24](https://www.instagram.com/proyecto_munay24/)|
 
 [Carpeta de campo](https://docs.google.com/document/d/1iEDpXWB5f0wMk0qT9sCNHTZRmYYTim4XL416siWD0ac/edit?usp=sharing)
 
@@ -83,8 +83,8 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 * 📧 Email: munayimpatrq@gmail.com
 
-* 🌐 Página Web: https://proyectomunay.github.io/
-
+* 🌐 Página Web: https://munay-impa.web.app/
+  
 * 📷 Instagram: @proyecto_munay24
 
 * 🗞️ Linktr.ee: https://linktr.ee/proyecto_munay
