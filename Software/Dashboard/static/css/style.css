@@ -10,9 +10,14 @@ html {
   font-size: 30px;
 }
 body {
-  background: rgb(88, 132, 145);
-  color: white;
+  background: #121222;
+  color: white !important;
   font-family: 'Open Sans', sans;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .gauge::before {
@@ -169,7 +174,7 @@ body {
 .gauge .digit:nth-of-type(11) .label {
   transform: rotate(-270deg);
 }
-.gauge .digit .label {
+#dashboard .gauge .digit .label {
   position:absolute;
   font-family: 'Changa One', cursive;
   font-style: italic;
@@ -338,6 +343,70 @@ body {
   animation-timing-function: linear, linear;
   animation-delay: 12s, 37s;
 }
+
+/* Modificado 10/11/24 a las 19hs */
+
+
+/* Header: alinear la hora en la esquina superior izquierda */
+.header-container {
+  display: flex;
+  padding: 20px;
+  background-color: #121222;
+  width: 100%;
+  position: relative; /* Asegura que esté posicionado en la parte superior */
+}
+
+.datetime {
+  top: 10px; /* Alineación hacia la esquina */
+  left: 10px;
+}
+
+.time {
+  font-size: 1.5rem;
+  color: black;
+}
+
+/* Main: velocidad a la izquierda, batería a la derecha */
+.main-container {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #121222;
+}
+
+/* Ajustar velocímetro */
+.speedmeter-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+/* Ajustar batería */
+.battery-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+/* Footer: botones a lo largo de todo el ancho */
+.footer-container {
+  width: 100%;
+  padding: 10px;
+  background-color: #121222;
+}
+
+.footer-container .button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
 @keyframes startUp {
   0% {
     transform: rotate(-30deg);

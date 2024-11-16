@@ -9,16 +9,15 @@ body{
     display:initial;
     justify-content:center;
     align-items:center;
-    background:#10101E;
+    background:#121222;
 }
 
 .datetime{
     color:#fff;
-    background:#10101E;
+    background:#121222;
     width: 263px;
     padding:1px 1px;
     position:relative;
-    left:15.75rem;
     bottom:-11rem;
 }
 
@@ -39,7 +38,7 @@ body{
 }
 
 .time span:last-child{
-    background:#071927;
+    background:#121222;
     font-size:20px;
     font-weight:600;
     text-transform:uppercase;
