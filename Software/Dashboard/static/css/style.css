@@ -10,7 +10,7 @@ html {
   font-size: 30px;
 }
 body {
-  background: rgb(88, 132, 145) !important;
+  background: #121222;
   color: white !important;
   font-family: 'Open Sans', sans;
   margin: 0;
@@ -352,7 +352,7 @@ body {
   display: flex;
   justify-items: flex-start;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #121222;
   width: 100%;
   position: relative; /* Asegura que esté posicionado en la parte superior */
 }
@@ -374,7 +374,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #e6e6e6;
+  background-color: #121222;
 }
 
 /* Ajustar velocímetro */
@@ -397,7 +397,7 @@ body {
 .footer-container {
   width: 100%;
   padding: 10px;
-  background-color: #f8f9fa;
+  background-color: #121222;
 }
 
 .footer-container .button-container {
