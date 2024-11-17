@@ -1,32 +1,75 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 	<head>
-		<title>Web Munay</title>
+		<title>Proyecto Munay</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Proyecto de IMPA TRQ sobre auto electrico semi autonomo con ADAS para industria aeronautica">
+		<link rel="icon" href="images/munay logo circulo.ico">
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
 		<!-- Header -->
-			<section id="header">
-				<div class="inner">
-						<nav>
-							<ul class="section-list">
-								<li><a href="#one" class="scrolly">De qué se trata?</a></li>
-								<li><a href="#two" class="scrolly">Qué son las ADAS?</a></li>
-								<li><a href="#three" class="scrolly">Quiénes somos?</a></li>
-								<li><a href="#footer" class="scrolly">Contactanos</a></li>
-							</ul>
-						</nav>
-					<img src="images/munay transparente.png" class="munay-responsive-image" alt="Munay Logo"></img>
-					<h1>Hola, esto es el <strong>MUNAY</strong><br />
-					Una propuesta innovadora en la<br />
-					industria aeronáutica</h1>
-				</div>
-			</section>
+	
+		<nav  id="navbar" class="navbar  navbar-expand-lg p-10 fixed-top" style="background-color: rgb(247,114,10);" data-bs-theme="dark">
+			<div class= "container-fluid">
+			<a class="navbar-brand" href="#">
+				<img id="logoprincipal" src="images/munay transparente.png" alt="logo"  width="50" height="50">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="#">MUNAY</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#one">¿De qué se trata?</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#two">¿Qué son las ADAS?</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#enfoque-comercial">¿Qué ofrecemos?</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#three" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					¿Quiénes somos?
+					</a>
+					<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#lucentini">Juan Sebastián Lucentini</a></li>
+					<li><a class="dropdown-item" href="#dubal">Agustin Dubal</a></li>
+					<li><a class="dropdown-item" href="#tamai">Franco Nahuel Tamai</a></li>
+					<li><a class="dropdown-item" href="#badeigts">Máximo Badeigts</a></li>
+					<li><a class="dropdown-item" href="#Pautaso">Valentino Gonzalez Pautaso</a></li>
+					<li><a class="dropdown-item" href="#melchor">Francisco Melchor</a></li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-end" href="#footer">Contactanos</a>
+				</li>
+				</ul>
 
+			</div>
+			</div>
+		</nav>
+
+
+
+	<div id="subtitulo" class="container-fluid text-center">
+		<img src="images/munay transparente.png" alt="logo" width="200px" >
+		<p>Hola, esto es el MUNAY<br>
+			Una propuesta innovadora en la
+			industria aeronáutica.</p>
+	</div>
+
+
+	
+	    
 		<!-- One -->
 			<section id="one" class="main style1">
 				<div class="container">
@@ -45,405 +88,111 @@
 				</div>
 			</section>
 
-		<!-- Two -->
-			<section id="two" class="main style2">
-				<div class="container">
-					<div class="row gtr-150">
-						<div class="col-6 col-12-medium">
-							<ul class="major-icons">
-								<span class="image fit"><img src="images/Mantenimiento de carril.png" alt="" /></span>
-								<span class="image fit"><img src="images/Frenado autonomo.png" alt="" /></span>
-							</ul>
-						</div>
-						<div class="col-6 col-12-medium">
-							<header class="major">
-								<h2>¿Qué son las ADAS?</h2>
-							</header>
-							<p>A.D.A.S. (Advanced Driver Assistance Systems) se los denomina a los sistemas de ayuda a la conducción, tanto de carácter pasivo como activo, en los vehículos tripulados. Esta particular clasificación de sistemas se divide en niveles, y conforme estos aumentan, se categoriza qué nivel de conducción autónoma se caracteriza el vehículo.</p>
-							<p>Dado a que la intención de estos sistemas tiende al reemplazo del conductor, a este se le debe dotar de sentidos receptores del entorno, como un humano tendría. Esta tarea se logra, y hasta supera en calidad a la percepción humana, mediante un sensado en tiempo real del exterior. Munay proyecta situarse entre el nivel 2 y 3 mediante tres sistemas activos y notificación pasiva: Mantenimiento de Carril Activo, Freno Autónomo y Control Crucero.</p>
-							<p><font color="2A97B0">Mantenimiento de Carril Activo:</font> centra constantemente el vehículo en el carril de la ruta donde se encuentre. Este sistema está conformado por una cámara en la parte superior del parabrisas, una IA entrenada para reconocer la posición del vehículo respecto del carril y un actuador eléctrico (servomotor) acoplado mediante un sistema de engranajes a la columna de dirección.</p>
-							<p><font color ="#00FF03">Freno Autónomo:</font> acciona el sistema de freno al detectar una distancia peligrosa con un objeto de frente al vehículo. Cinco sensores ultrasónicos son quienes le brindan información de la distancia del objeto situado frente al vehículo. Mediante una serie de cálculos, donde se averigua tanto la distancia como la </p>
-							<p>Control Crucero: Setea a elección del conductor una velocidad constante en los motores. Mediante el microcontrolador, se le suministra una corriente eléctrica constante y controlada dependiendo de qué velocidad se definió (a mayor velocidad, mayor caudal).</p>
-						</div>
-					</div>
+<!-- Two -->
+	<section id="two" class="main style2 special">
+		<div class="container">
+			<header class="major">
+				<h2>¿Qué son las A.D.A.S.?</h2>
+			</header>
+				<p>A.D.A.S. (Advanced Driver Assistance Systems) se los denomina a los sistemas de ayuda a la conducción, tanto de carácter pasivo como activo, en los vehículos tripulados. Esta particular clasificación de sistemas se divide en niveles, y conforme estos aumentan, se categoriza qué nivel de conducción autónoma se caracteriza el vehículo. <br>
+					<br>
+				Dado a que la intención de estos sistemas tiende al reemplazo del conductor, a este se le debe dotar de sentidos receptores del entorno, como un humano tendría. Esta tarea se logra, y hasta supera en calidad a la percepción humana, mediante un sensado en tiempo real del exterior. Munay proyecta situarse entre el nivel 2 y 3 mediante tres sistemas activos y notificación pasiva: Mantenimiento de Carril Activo, Freno Autónomo y Control Crucero.</p>
+		
+			<div class="row gtr-150">
+				<div class="col-4 col-12-medium">
+					<span class="image fit"><img src="images/Mantenimiento de carril.png" alt="" /></span>
+					<h3>Mantenimiento de Carril Activo</h3>
+					<p>Centra constantemente el vehículo en el carril de la ruta donde se encuentre. Este sistema está conformado por una cámara en la parte superior del parabrisas, una IA entrenada para reconocer la posición del vehículo respecto del carril y un actuador eléctrico acoplado mediante un sistema de engranajes a la columna de dirección.</p>
 				</div>
-			</section>
+		
+				<div class="col-4 col-12-medium">
+					<span class="image fit"><img src="images/Frenado autonomo.png" alt="" /></span>
+					<h3>Freno Autónomo</h3>
+					<p>Acciona el sistema de freno al detectar una distancia peligrosa con un objeto frente al vehículo. Cuatro sensores ultrasónicos son quienes le brindan información de la distancia del objeto situado frente al vehículo. Mediante una serie de cálculos, en los cuales se averigua tanto la distancia como la velocidad del objeto de enfrente, se determina la necesidad de frenar y la intensidad de dicha desaceleración.</p>
+				</div>
+		
+				<div class="col-4 col-12-medium">
+					<span  class="image fit"><img src="images/Control crucero.png" alt="" /></span>
+					<h3>Control Crucero</h3>
+					<p>Configura a elección del conductor una velocidad constante en los motores. Mediante el microcontrolador, se le suministra una corriente eléctrica constante y controlada dependiendo de qué velocidad se definió (a mayor velocidad, mayor caudal).</p>
+				</div>				
+			</div>
+		</div>
+	</section>
 
+<!-- enfoque comercial -->
+	<section id="enfoque-comercial" class="main style1">
+    	<div class="container">
+        	<header class="major">
+            	<h2>Enfoque Comercial</h2>
+        	</header>
+        	<p>Munay no solo es un proyecto innovador, sino también una oportunidad de impacto comercial. Aunque fue creado inicialmente para la seguridad aeroportuaria, su versatilidad le permite adaptarse a otros sectores gracias a su capacidad de configuración, nuestro vehículo eléctrico se posiciona como una solución ecológica, eficiente y tecnológicamente avanzada para la industria, alineándose con las demandas crecientes de sostenibilidad y automatización.</p>
+        	<div class="row gtr-150">
+            	<div class="col-6 col-12-medium">
+                	<h3>Mercado Objetivo</h3>
+                	<p>Munay está orientado a empresas y organizaciones gubernamentales que requieren soluciones avanzadas de movilidad para mejorar la supervisión, seguridad y eficiencia operativa en entornos como aeropuertos, zonas industriales, plantas logísticas y obras de construcción. Es ideal para instituciones comprometidas con la reducción de emisiones y la innovación en procesos de monitoreo y control</p>
+            	</div>
+            	<div class="col-6 col-12-medium">
+                	<h3>Ventajas Competitivas</h3>
+                	<p>Como vehículo eléctrico, Munay minimiza las emisiones, lo que lo hace ideal para entornos que priorizan la sustentabilidad, su capacidad de conducción semiautónoma y su sistema de inteligencia artificial adaptable para reconocimiento visual lo convierten en una herramienta flexible y eficiente, capaz de optimizar recursos, reducir costos de operación y mantenimiento</p>
+            	</div>
+        	</div>
+        	<div class="row gtr-150">
+            	<div class="col-12">
+                	<h3>Proyecciones</h3>
+                	<p>Con el crecimiento continuo de las industrias y la tendencia hacia vehículos eléctricos, proyectamos un aumento en la demanda para soluciones como Munay en los próximos años.</p>
+            	</div>
+        	</div>
+    	</div>
+	</section>
+					
 		<!-- Three -->
-			<section id="three" class="main style1 special">
+			<section id="three" class="main style2 special">
 				<div class="container">
 					<header class="major">
 						<h2>¿Quiénes somos?</h2>
 					</header>
-					<p><span style="font-size: 32px; margin: 21px 0;"
-						>7mo 1ra aviónica - Comisión B</span></p>
+					<p><span style="font-size: 32px; margin: 21px 0;">7mo 1ra aviónica - Comisión B</span></p>
 
 					<div class="row gtr-150">
 						<div class="col-4 col-12-medium">
-							<span class="image fit"><img src="images/juanse.jpg" alt="" /></span>
+							<span id="lucentini" class="image fit"><img src="images/juanse.jpg" alt="" /></span>
 							<h3>Juan Sebastián Lucentini</h3>
-							<p>En este proyecto aprendí mucho sobre programación, tanto de desarrollo web como de aplicaciones, lo cual me ayudó a confirmar que es lo que quiero estudiar y dedicarme en un futuro.</p>
+							<p>En este proyecto aprendí mucho sobre programación, tanto de desarrollo web como de aplicaciones, lo que me ayudó a confirmar que es lo que quiero estudiar y dedicarme en un futuro.</p>
 						</div>
 
 						<div class="col-4 col-12-medium">
-							<span class="image fit"><img src="images/foto pagina web dubi.jpg" alt="" /></span>
+							<span id="dubal" class="image fit"><img src="images/foto pagina web dubi.jpg" alt="" /></span>
 							<h3>Agustin Dubal</h3>
 							<p>Desde siempre me interesé por la electrónica y el desarrollo de software, en este proyecto pude absorber muchos conocimientos sobre estos temas y aprender aplicando estos conocimientos.</p>
 						</div>
 
 						<div class="col-4 col-12-medium">
-							<span class="image fit"><img src="images/franco.jpeg" alt="" /></span>
+							<span id="tamai" class="image fit"><img src="images/franco.jpeg" alt="" /></span>
 							<h3>Franco Nahuel Tamai</h3>
 							<p>Trabajar en este proyecto me ha permitido mejorar mis conocimientos y habilidades en mecánica y electrónica. Planeo continuar mis estudios en Bioingeniería una vez finalice mi tecnicatura, debido a mi gran interés por la electrónica aplicada a la salud.</p>
 						</div>
 
 						<div class="col-4 col-12-medium">
-							<span class="image fit"><img src="images/maxi.JPG" alt="" /></span>
+							<span id="badeigts" class="image fit"><img src="images/maxi.JPG" alt="" /></span>
 							<h3>Máximo Badeigts</h3>
 							<p>Soy un real aficionado del rubro automotriz, llamándome la atención tanto los vehículos como su industria. Éste proyecto me entusiasmo desde un principio, porque pude combinar el rubro automotriz, la electrónica y un aprendizaje eterno junto a un buen grupo de amigos</p>
 						</div>
 
 						<div class="col-4 col-12-medium">
-							<span class="image fit"><img src="images/pauta2.jpg" alt="" /></span>
+							<span id="pautaso" class="image fit"><img src="images/pauta2.jpg" alt="" /></span>
 							<h3>Valentino Gonzalez Pautaso</h3>
 							<p>A lo largo del desarrollo del proyecto aprendí a avanzar sin importar las circunstancias, y a entender más sobre el mundo que me apasiona, la ingeniería.</p>
 						</div>
 
 						<div class="col-4 col-12-medium">
-							<span class="image fit"><img src="images/melchor.jpg" alt="" /></span>
+							<span id="melchor" class="image fit"><img src="images/melchor.jpg" alt="" /></span>
 							<h3>Francisco Melchor</h3>
 							<p>Durante el año, al trabajar con el proyecto logré adquirir una gran variedad de conocimientos a través de ayuda de profesores o investigación propia y también logré ganar experiencia en áreas de trabajo desconocidas para mi.</p>
 						</div>
 					</div>
 				</div>
 			</section>
-
-		<!-- Four -->
-		 <!--
-			<section id="four" class="main style2 special">
-				<div class="container">
-					<header class="major">
-						<h2>Contáctanos</h2>
-					</header>
-					<p>Sed lacus nascetur ac ante amet sapien.</p>
-					<ul class="actions special">
-						<li><a href="#" class="button wide primary">Sign Up</a></li>
-						<li><a href="#" class="button wide">Learn More</a></li>
-					</ul>
-				</div>
-			</section>
-			-->
-		<!-- Five -->
-		<!--
-			<section id="five" class="main style1">
-				<div class="container">
-					<header class="major special">
-						<h2>Elements</h2>
-					</header>
-
-					<section>
-						<h4>Text</h4>
-						<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-						This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-						This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-						<hr />
-						<header>
-							<h4>Heading with a Subtitle</h4>
-							<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-						</header>
-						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-						<header>
-							<h5>Heading with a Subtitle</h5>
-							<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-						</header>
-						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-						<hr />
-						<h2>Heading Level 2</h2>
-						<h3>Heading Level 3</h3>
-						<h4>Heading Level 4</h4>
-						<h5>Heading Level 5</h5>
-						<h6>Heading Level 6</h6>
-						<hr />
-						<h5>Blockquote</h5>
-						<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-						<h5>Preformatted</h5>
-						<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-print 'Iteration ' + i;
-deck.shuffle();
-i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-					</section>
-
-					<section>
-						<h4>Lists</h4>
-						<div class="row">
-							<div class="col-6 col-12-medium">
-								<h5>Unordered</h5>
-								<ul>
-									<li>Dolor pulvinar etiam.</li>
-									<li>Sagittis adipiscing.</li>
-									<li>Felis enim feugiat.</li>
-								</ul>
-								<h5>Alternate</h5>
-								<ul class="alt">
-									<li>Dolor pulvinar etiam.</li>
-									<li>Sagittis adipiscing.</li>
-									<li>Felis enim feugiat.</li>
-								</ul>
-							</div>
-							
-							<div class="col-6 col-12-medium">
-								<h5>Ordered</h5>
-								
-								<h5>Icons</h5>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-								</ul>
-							</div>
-						</div>
-						<h5>Actions</h5>
-						<div class="row">
-							<div class="col-6 col-12-medium">
-								<ul class="actions">
-									<li><a href="#" class="button primary">Default</a></li>
-									<li><a href="#" class="button">Default</a></li>
-								</ul>
-								<ul class="actions small">
-									<li><a href="#" class="button primary small">Small</a></li>
-									<li><a href="#" class="button small">Small</a></li>
-								</ul>
-								<ul class="actions stacked">
-									<li><a href="#" class="button primary">Default</a></li>
-									<li><a href="#" class="button">Default</a></li>
-								</ul>
-								<ul class="actions stacked">
-									<li><a href="#" class="button primary small">Small</a></li>
-									<li><a href="#" class="button small">Small</a></li>
-								</ul>
-							</div>
-							<div class="col-6 col-12-medium">
-								<ul class="actions stacked">
-									<li><a href="#" class="button primary fit">Default</a></li>
-									<li><a href="#" class="button fit">Default</a></li>
-								</ul>
-								<ul class="actions stacked">
-									<li><a href="#" class="button primary small fit">Small</a></li>
-									<li><a href="#" class="button small fit">Small</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-					<section>
-						<h4>Table</h4>
-						<h5>Default</h5>
-						<div class="table-wrapper">
-							<table>
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Price</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Item One</td>
-										<td>Ante turpis integer aliquet porttitor.</td>
-										<td>29.99</td>
-									</tr>
-									<tr>
-										<td>Item Two</td>
-										<td>Vis ac commodo adipiscing arcu aliquet.</td>
-										<td>19.99</td>
-									</tr>
-									<tr>
-										<td>Item Three</td>
-										<td> Morbi faucibus arcu accumsan lorem.</td>
-										<td>29.99</td>
-									</tr>
-									<tr>
-										<td>Item Four</td>
-										<td>Vitae integer tempus condimentum.</td>
-										<td>19.99</td>
-									</tr>
-									<tr>
-										<td>Item Five</td>
-										<td>Ante turpis integer aliquet porttitor.</td>
-										<td>29.99</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="2"></td>
-										<td>100.00</td>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-
-						<h5>Alternate</h5>
-						<div class="table-wrapper">
-							<table class="alt">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Price</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Item One</td>
-										<td>Ante turpis integer aliquet porttitor.</td>
-										<td>29.99</td>
-									</tr>
-									<tr>
-										<td>Item Two</td>
-										<td>Vis ac commodo adipiscing arcu aliquet.</td>
-										<td>19.99</td>
-									</tr>
-									<tr>
-										<td>Item Three</td>
-										<td> Morbi faucibus arcu accumsan lorem.</td>
-										<td>29.99</td>
-									</tr>
-									<tr>
-										<td>Item Four</td>
-										<td>Vitae integer tempus condimentum.</td>
-										<td>19.99</td>
-									</tr>
-									<tr>
-										<td>Item Five</td>
-										<td>Ante turpis integer aliquet porttitor.</td>
-										<td>29.99</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="2"></td>
-										<td>100.00</td>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-					</section>
-
-					<section>
-						<h4>Buttons</h4>
-						<ul class="actions">
-							<li><a href="#" class="button primary">Primary</a></li>
-							<li><a href="#" class="button">Default</a></li>
-						</ul>
-						<ul class="actions">
-							<li><a href="#" class="button large">Large</a></li>
-							<li><a href="#" class="button">Default</a></li>
-							<li><a href="#" class="button small">Small</a></li>
-						</ul>
-						<ul class="actions fit">
-							<li><a href="#" class="button fit">Fit</a></li>
-							<li><a href="#" class="button primary fit">Fit</a></li>
-							<li><a href="#" class="button fit">Fit</a></li>
-						</ul>
-						<ul class="actions fit small">
-							<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-							<li><a href="#" class="button fit small">Fit + Small</a></li>
-							<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-						</ul>
-						<ul class="actions">
-							<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-							<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-						</ul>
-						<ul class="actions">
-							<li><span class="button primary disabled">Disabled</span></li>
-							<li><span class="button disabled">Disabled</span></li>
-						</ul>
-					</section>
-
-					<section>
-						<h4>Form</h4>
-						<form method="post" action="#">
-							<div class="row gtr-uniform gtr-50">
-								<div class="col-6 col-12-xsmall">
-									<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-								</div>
-								<div class="col-6 col-12-xsmall">
-									<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-								</div>
-								<div class="col-12">
-									<select name="demo-category" id="demo-category">
-										<option value="">- Category -</option>
-										<option value="1">Manufacturing</option>
-										<option value="1">Shipping</option>
-										<option value="1">Administration</option>
-										<option value="1">Human Resources</option>
-									</select>
-								</div>
-								<div class="col-4 col-12-small">
-									<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-									<label for="demo-priority-low">Low</label>
-								</div>
-								<div class="col-4 col-12-small">
-									<input type="radio" id="demo-priority-normal" name="demo-priority">
-									<label for="demo-priority-normal">Normal</label>
-								</div>
-								<div class="col-4 col-12-small">
-									<input type="radio" id="demo-priority-high" name="demo-priority">
-									<label for="demo-priority-high">High</label>
-								</div>
-								<div class="col-6 col-12-small">
-									<input type="checkbox" id="demo-copy" name="demo-copy">
-									<label for="demo-copy">Email me a copy</label>
-								</div>
-								<div class="col-6 col-12-small">
-									<input type="checkbox" id="demo-human" name="demo-human" checked>
-									<label for="demo-human">Not a robot</label>
-								</div>
-								<div class="col-12">
-									<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-								</div>
-								<div class="col-12">
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</div>
-							</div>
-						</form>
-					</section>
-
-					<section>
-						<h4>Image</h4>
-						<h5>Fit</h5>
-						<div class="box alt">
-							<div class="row gtr-uniform gtr-50">
-								<div class="col-12"><span class="image fit"><img src="images/pic06.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-							</div>
-						</div>
-						<h5>Left &amp; Right</h5>
-						<p><span class="image left"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-						<p><span class="image right"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-					</section>
-
-				</div>
-			</section>
-		-->
 
 		<!-- Footer -->
 			<section id="footer">
@@ -453,7 +202,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 					<li><a href="mailto:munayimpa@gmail.com?subject=Pregunta%20de%20la%20página%20web" rel="noopener noreferrer" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>Diseño por: <a href="images/j y dubi.JPG">Dubal y Lucentini</a></li>
+					<li>Diseño por: <a id="egg" href="images/j y dubi.JPG" target="_blank" class="eegg" style="text-decoration: none;">Dubal y Lucentini</a></li>
 				</ul>
 			</section>
 
@@ -464,6 +213,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 	</body>
 </html>
