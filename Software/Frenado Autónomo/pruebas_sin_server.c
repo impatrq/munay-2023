@@ -2,15 +2,15 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
-#include <stdlib.h>       
-#include "libs/hysrf05.h"  
+#include <stdlib.h>
+#include "libs/hysrf05.h"
 
 #define NUM_SENSORS 3
 
 // Definir los sensores
 Sensor sensors[NUM_SENSORS] = {
     {14, 15}, // Pines sensor 1
-    {18, 23}, // Pines sensor 2 
+    {18, 23}, // Pines sensor 2
     {24, 25}, // Pines sensor 3
 };
 
@@ -41,7 +41,7 @@ void* control_motor(void* arg) {
     while (1) {
         pthread_mutex_lock(&distance_mutex); //bloquear acceso a variable de distancia mínima
         double current_distance = min_distance;
-        pthread_mutex_unlock(&distance_mutex); //desbloquear acceso 
+        pthread_mutex_unlock(&distance_mutex); //desbloquear acceso
 
         printf("Distancia actual: %.2f cm, Estado del motor: %d\n", current_distance, motor_active);
 
@@ -105,6 +105,14 @@ int main() {
         return 1;
     }
 
+    // Inicializar el mutex
+    pthread_mutex_init(&distance_mutex, NULL);
+
+    // Declarar los hilos
+    pthread_t sensor_threads[NUM_SENSORS];
+    pthread_t motor_thread;
+    pthread_t reset_thread;
+
     // Inicializar los sensores
     for (int i = 0; i < NUM_SENSORS; i++) {
     int *sensor_index = malloc(sizeof(int));
@@ -122,14 +130,6 @@ int main() {
         printf("Error al configurar el pin del motor (GPIO %d) como salida\n", MOTOR_PIN_1);
         return 1;
     }
-
-        // Inicializar el mutex
-    pthread_mutex_init(&distance_mutex, NULL);
-
-    // Declarar los hilos
-    pthread_t sensor_threads[NUM_SENSORS];
-    pthread_t motor_thread;
-    pthread_t reset_thread;
 
     // Crear hilos de medición para cada sensor
     for (int i = 0; i < NUM_SENSORS; i++) {
