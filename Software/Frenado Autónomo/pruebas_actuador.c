@@ -11,13 +11,6 @@
 
 #define NUM_SENSORS 3
 
-// Definir los sensores
-Sensor sensors[NUM_SENSORS] = {
-    {14, 15}, // Pines sensor 1
-    {18, 23}, // Pines sensor 2 
-    {24, 25}, // Pines sensor 3
-};
-
 // Función de escritura para almacenar la respuesta de cURL
 size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
     strcat(data, (char *)ptr);
@@ -51,11 +44,18 @@ char *get_braking_profile() {
     return response;  // Devuelve la respuesta como una cadena
 }
 
+// Definir los sensores
+Sensor sensors[NUM_SENSORS] = {
+    {14, 15}, // Pines sensor 1
+    {18, 23}, // Pines sensor 2 
+    {24, 25}, // Pines sensor 3
+};
+
 // Pines del motor
 #define MOTOR_PIN_1 8  // GPIO para controlar el motor
 
 // Define la distancia límite (5 metros)
-#define MAX_DISTANCE 500
+#define MAX_DISTANCE 450
 
 // Variables compartidas
 double min_distance = 9999;  // Almacena la distancia mínima medida
@@ -64,53 +64,68 @@ pthread_mutex_t distance_mutex;  // Mutex para proteger el acceso a la variable 
 // Variable para el estado del freno
 int motor_active = 0;  // 0 = reposo, 1 = frenando
 
-// Función para accionar el freno
-void activate_brake(double time_on) {
-    gpioWrite(MOTOR_PIN_1, PI_HIGH);  // Activa el motor
-    usleep(time_on * 1000000000);        // Mantiene el motor activo por el tiempo calculado
-    gpioWrite(MOTOR_PIN_1, PI_LOW);   // Detiene el motor
-}
-
 // Función para controlar el motor
-void control_motor() {
+void* control_motor(void* arg) {
     while (1) {
-        pthread_mutex_lock(&distance_mutex);  // Bloquear acceso a min_distance
+        pthread_mutex_lock(&distance_mutex); //bloquear acceso a variable de distancia mínima
         double current_distance = min_distance;
-        pthread_mutex_unlock(&distance_mutex);  // Desbloquear acceso
+        pthread_mutex_unlock(&distance_mutex); //desbloquear acceso 
 
-        if (current_distance < MAX_DISTANCE && motor_active == 0) {
+        printf("Distancia actual: %.2f cm, Estado del motor: %d\n", current_distance, motor_active);
+
+        if (current_distance < MAX_DISTANCE) {
             // Si el objeto está dentro del rango y el motor está inactivo
-            double time_on = (MAX_DISTANCE - current_distance) / MAX_DISTANCE * 2;  // Tiempo de activación del freno
-            activate_brake(time_on);  // Activa el freno
-            motor_active = 1;  // Cambia el estado a "frenando"
+            printf("Activando el motor. Distancia: %.2f cm\n", current_distance);
+            gpioWrite(MOTOR_PIN_1, PI_HIGH); // Encender el motor
+            motor_active = 1; // Cambia estado a "frenando"
         } else if (current_distance >= MAX_DISTANCE && motor_active == 1) {
             // Si el objeto está fuera del rango y el freno está activado, detener el motor
-            gpioWrite(MOTOR_PIN_1, PI_LOW);  // Detener el motor
-            motor_active = 0;  // Cambiar el estado a "reposo"
+            printf("Desactivando el motor. Distancia: %.2f cm\n", current_distance);
+            gpioWrite(MOTOR_PIN_1, PI_LOW); // Detener el motor
+            motor_active = 0; // Cambia estado a "reposo"
         }
 
-        usleep(100000);  // Pequeño retardo para evitar sobrecarga de CPU (100ms)
+        usleep(100000); // Pequeño retardo para evitar sobrecarga de CPU (100ms)
     }
+    return NULL;
 }
 
 // Función de cada hilo de medición
 void *measure_distance(void *arg) {
     int sensor_index = *(int *)arg;
+    free(arg);
+
     while (1) {
         double distance = sensor_get_distance(&sensors[sensor_index]);
+        printf("Sensor %d: distancia medida = %.2f cm\n", sensor_index + 1, distance);
 
-        // Bloquear mutex y actualizar la distancia mínima
+
+        //bloquear mutex y modificar distancia minima
         pthread_mutex_lock(&distance_mutex);
-        if (distance < min_distance) {
+        if (distance < min_distance || min_distance == 9999) {
             min_distance = distance;
+            printf("Nueva distancia mínima: %.2f cm\n", min_distance);
         }
         pthread_mutex_unlock(&distance_mutex);
 
-        usleep(500000);  // Espera 500 ms antes de la siguiente medición
+        usleep(500000);
     }
 
     return NULL;
 }
+
+// Función para reiniciar la distancia mínima cada 5 segundos
+void* reset_min_distance(void* arg) {
+    while (1) {
+        sleep(5);  // Espera 5 segundos
+        pthread_mutex_lock(&distance_mutex);
+        min_distance = 9999;
+        pthread_mutex_unlock(&distance_mutex);
+        printf("Reiniciando distancia mínima\n");
+    }
+    return NULL;
+}
+
 
 int main() {
     char *profile = get_braking_profile();
@@ -118,41 +133,59 @@ int main() {
     // Procesa la respuesta y usa el perfil de frenado
     printf("Perfil de frenado actual: %s\n", profile);
 
-    // Aquí podrías añadir lógica para usar el perfil en el código de frenado
-    if (strstr(profile, "dry")) {
-        printf("Modo de frenado en condiciones secas.\n");
-        // Código para modo seco
-        if (gpioInitialise() < 0) {
+    if (gpioInitialise() < 0) {
             printf("¡Error al iniciar pigpio!\n");
             return 1;
         }
 
         // Inicializar los sensores
         for (int i = 0; i < NUM_SENSORS; i++) {
-            sensor_init(&sensors[i]);
+        int *sensor_index = malloc(sizeof(int));
+        *sensor_index = i;
+        if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
+            printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+            return 1;
+            }
         }
+
+                // Inicializar el mutex
+        pthread_mutex_init(&distance_mutex, NULL);
+
+        // Declarar los hilos
+        pthread_t sensor_threads[NUM_SENSORS];
+        pthread_t motor_thread;
+        pthread_t reset_thread;
 
         // Inicializar el pin del motor
         gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
 
-        // Inicializar el mutex
-        pthread_mutex_init(&distance_mutex, NULL);
+        if (gpioGetMode(MOTOR_PIN_1) != PI_OUTPUT) {
+            printf("Error al configurar el pin del motor (GPIO %d) como salida\n", MOTOR_PIN_1);
+            return 1;
+        }
+
+    // añadir lógica para usar el perfil en el código de frenado
+    if (strstr(profile, "dry")) {
 
         // Crear hilos de medición para cada sensor
-        pthread_t sensor_threads[NUM_SENSORS];
-        int sensor_indexes[NUM_SENSORS];  // Almacena los índices de los sensores
         for (int i = 0; i < NUM_SENSORS; i++) {
-            sensor_indexes[i] = i;
-            if (pthread_create(&sensor_threads[i], NULL, measure_distance, &sensor_indexes[i]) != 0) {
+            int *sensor_index = malloc(sizeof(int));
+            *sensor_index = i;
+            if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
                 printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
                 return 1;
             }
         }
 
         // Crear el hilo para controlar el motor
-        pthread_t motor_thread;
         if (pthread_create(&motor_thread, NULL, control_motor, NULL) != 0) {
             printf("Error al crear el hilo de control del motor\n");
+            return 1;
+        }
+
+        // Crear el hilo para reiniciar la distancia mínima
+        if (pthread_create(&reset_thread, NULL, reset_min_distance, NULL) != 0) {
+            printf("Error al crear el hilo de reinicio de distancia mínima\n");
             return 1;
         }
 
@@ -161,14 +194,86 @@ int main() {
             pthread_join(sensor_threads[i], NULL);
         }
         pthread_join(motor_thread, NULL);
+        pthread_join(reset_thread, NULL);
+
+        gpioTerminate();  // Finalizar pigpio
+        pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
+
+        return 0;
 
 
     } else if (strstr(profile, "rain")) {
         printf("Modo de frenado en condiciones de lluvia.\n");
-        // Código para modo lluvia
+        // Código para modo lluvia, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas
+        // Crear hilos de medición para cada sensor
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            int *sensor_index = malloc(sizeof(int));
+            *sensor_index = i;
+            if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
+                printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+                return 1;
+            }
+        }
+
+        // Crear el hilo para controlar el motor
+        if (pthread_create(&motor_thread, NULL, control_motor, NULL) != 0) {
+            printf("Error al crear el hilo de control del motor\n");
+            return 1;
+        }
+
+        // Crear el hilo para reiniciar la distancia mínima
+        if (pthread_create(&reset_thread, NULL, reset_min_distance, NULL) != 0) {
+            printf("Error al crear el hilo de reinicio de distancia mínima\n");
+            return 1;
+        }
+
+        // Esperar a que los hilos terminen (aunque no lo harán, ya que corren indefinidamente)
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            pthread_join(sensor_threads[i], NULL);
+        }
+        pthread_join(motor_thread, NULL);
+        pthread_join(reset_thread, NULL);
+
+        gpioTerminate();  // Finalizar pigpio
+        pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
+
+        return 0;
     } else if (strstr(profile, "snow")) {
         printf("Modo de frenado en condiciones de nieve.\n");
-        // Código para modo nieve
+        // Código para modo nieve, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas 
+        // Crear hilos de medición para cada sensor
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            int *sensor_index = malloc(sizeof(int));
+            *sensor_index = i;
+            if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
+                printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+                return 1;
+            }
+        }
+
+        // Crear el hilo para controlar el motor
+        if (pthread_create(&motor_thread, NULL, control_motor, NULL) != 0) {
+            printf("Error al crear el hilo de control del motor\n");
+            return 1;
+        }
+
+        // Crear el hilo para reiniciar la distancia mínima
+        if (pthread_create(&reset_thread, NULL, reset_min_distance, NULL) != 0) {
+            printf("Error al crear el hilo de reinicio de distancia mínima\n");
+            return 1;
+        }
+
+        // Esperar a que los hilos terminen (aunque no lo harán, ya que corren indefinidamente)
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            pthread_join(sensor_threads[i], NULL);
+        }
+        pthread_join(motor_thread, NULL);
+        pthread_join(reset_thread, NULL);
+
+        gpioTerminate();  // Finalizar pigpio
+        pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
+
+        return 0;
     } else {
         printf("Modo de frenado desconocido.\n");
     }
