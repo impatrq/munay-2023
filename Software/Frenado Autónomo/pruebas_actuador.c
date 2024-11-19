@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
+#include <cjson/cJSON.h>
 #include "libs/hysrf05.h"  
 
 #define URL "http://localhost:5000/get_braking_profile"
@@ -22,6 +23,7 @@ char *get_braking_profile() {
     CURL *curl;
     CURLcode res;
     static char response[100] = "";  // Almacena la respuesta del servidor
+    memset(response, 0, sizeof(response)); //Asegurar que el buffer está vacío
 
     curl = curl_easy_init();
     if(curl) {
@@ -40,6 +42,42 @@ char *get_braking_profile() {
         // Libera recursos de cURL
         curl_easy_cleanup(curl);
     }
+
+    //Verificar que la respuesta contenga algo
+    if(strlen(response) == 0){
+
+        fprintf(stderr, "Error: respuesta del servidor vacía.\n");
+        return "unknown";
+
+    }
+
+    printf("Respuesta completa del servidor: %s\n", response);
+
+    //Parsear la respuesta JSON con cJSON
+    cJSON *json = cJSON_Parse(response);
+    if(!json) {
+        fprintf(stderr, "Error al parsear JSON: %s\n", cJSON_GetErrorPtr());
+        return unknown;
+    }
+
+    //Extraer el valor del campo "profile"
+    cJSON *profile_item = cJSON_GetObjectItemCaseSensitive(json, "profile");
+    if (cJSON_IsString(profile_item) && (profile_item->valuestring != NULL)) {
+        printf("Perfil extraído: %s\n", profile_item->valuestring);
+        static char profile[10];
+        strncpy(profile, profile_item->valuestring, sizeof(profile) - 1);
+        profile[sizeof(profile) - 1] = '\0'; // Asegurar el terminador nulo
+
+        cJSON_Delete(json); // Liberar memoria
+        return profile;
+    } else {
+        fprintf(stderr, "Error: el campo 'profile' no es válido o no existe.\n");
+    }
+
+    cJSON_Delete(json); // Liberar memoria
+    return "unknown";
+    
+    printf("Perfil extraído: %s\n", profile);
 
     return response;  // Devuelve la respuesta como una cadena
 }
@@ -133,39 +171,41 @@ int main() {
     // Procesa la respuesta y usa el perfil de frenado
     printf("Perfil de frenado actual: %s\n", profile);
 
+
+    // Inicializar el mutex
+    pthread_mutex_init(&distance_mutex, NULL);
+
+    // Declarar los hilos
+    pthread_t sensor_threads[NUM_SENSORS];
+    pthread_t motor_thread;
+    pthread_t reset_thread;
+
     if (gpioInitialise() < 0) {
             printf("¡Error al iniciar pigpio!\n");
             return 1;
         }
 
         // Inicializar los sensores
-        for (int i = 0; i < NUM_SENSORS; i++) {
-        int *sensor_index = malloc(sizeof(int));
-        *sensor_index = i;
-        if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
-            printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
-            return 1;
-            }
+    for (int i = 0; i < NUM_SENSORS; i++) {
+    int *sensor_index = malloc(sizeof(int));
+    *sensor_index = i;
+    if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
+        printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
+        return 1;
         }
+    }
 
-                // Inicializar el mutex
-        pthread_mutex_init(&distance_mutex, NULL);
 
-        // Declarar los hilos
-        pthread_t sensor_threads[NUM_SENSORS];
-        pthread_t motor_thread;
-        pthread_t reset_thread;
+    // Inicializar el pin del motor
+    gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
 
-        // Inicializar el pin del motor
-        gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
-
-        if (gpioGetMode(MOTOR_PIN_1) != PI_OUTPUT) {
-            printf("Error al configurar el pin del motor (GPIO %d) como salida\n", MOTOR_PIN_1);
-            return 1;
-        }
+    if (gpioGetMode(MOTOR_PIN_1) != PI_OUTPUT) {
+        printf("Error al configurar el pin del motor (GPIO %d) como salida\n", MOTOR_PIN_1);
+        return 1;
+    }
 
     // añadir lógica para usar el perfil en el código de frenado
-    if (strstr(profile, "dry")) {
+    if (strcmp(profile, "dry") == 0) {
 
         // Crear hilos de medición para cada sensor
         for (int i = 0; i < NUM_SENSORS; i++) {
@@ -202,7 +242,7 @@ int main() {
         return 0;
 
 
-    } else if (strstr(profile, "rain")) {
+    } else if (strcmp(profile, "rain") == 0) {
         printf("Modo de frenado en condiciones de lluvia.\n");
         // Código para modo lluvia, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas
         // Crear hilos de medición para cada sensor
@@ -238,7 +278,7 @@ int main() {
         pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
 
         return 0;
-    } else if (strstr(profile, "snow")) {
+    } else if (strcmp(profile, "snow") == 0) {
         printf("Modo de frenado en condiciones de nieve.\n");
         // Código para modo nieve, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas 
         // Crear hilos de medición para cada sensor
