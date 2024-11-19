@@ -2,15 +2,15 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <pigpio.h>
-#include <stdlib.h>
-#include "libs/hysrf05.h"
+#include <stdlib.h>       
+#include "libs/hysrf05.h"  
 
 #define NUM_SENSORS 3
 
 // Definir los sensores
 Sensor sensors[NUM_SENSORS] = {
     {14, 15}, // Pines sensor 1
-    {18, 23}, // Pines sensor 2
+    {18, 23}, // Pines sensor 2 
     {24, 25}, // Pines sensor 3
 };
 
@@ -27,28 +27,18 @@ pthread_mutex_t distance_mutex;  // Mutex para proteger el acceso a la variable 
 // Variable para el estado del freno
 int motor_active = 0;  // 0 = reposo, 1 = frenando
 
-// Función para accionar el freno
-void activate_brake(double time_on) {
-    printf("Activando freno por %.2f segundos\n", time_on);
-    gpioWrite(MOTOR_PIN_1, PI_HIGH); // Encender el motor
-    usleep(time_on * 1000000); // Mantener el motor activado por el tiempo especificado
-    gpioWrite(MOTOR_PIN_1, PI_LOW);
-    printf("Freno desactivado\n"); // Apagar el motor
-}
-
 // Función para controlar el motor
 void* control_motor(void* arg) {
     while (1) {
         pthread_mutex_lock(&distance_mutex); //bloquear acceso a variable de distancia mínima
         double current_distance = min_distance;
-        pthread_mutex_unlock(&distance_mutex); //desbloquear acceso
+        pthread_mutex_unlock(&distance_mutex); //desbloquear acceso 
 
         printf("Distancia actual: %.2f cm, Estado del motor: %d\n", current_distance, motor_active);
 
         if (current_distance < MAX_DISTANCE) {
             // Si el objeto está dentro del rango y el motor está inactivo
             printf("Activando el motor. Distancia: %.2f cm\n", current_distance);
-            double time_on = (MAX_DISTANCE - current_distance) / MAX_DISTANCE * 2; // Tiempo de activación proporcional a la distancia
             gpioWrite(MOTOR_PIN_1, PI_HIGH); // Encender el motor
             motor_active = 1; // Cambia estado a "frenando"
         } else if (current_distance >= MAX_DISTANCE && motor_active == 1) {
@@ -105,14 +95,6 @@ int main() {
         return 1;
     }
 
-    // Inicializar el mutex
-    pthread_mutex_init(&distance_mutex, NULL);
-
-    // Declarar los hilos
-    pthread_t sensor_threads[NUM_SENSORS];
-    pthread_t motor_thread;
-    pthread_t reset_thread;
-
     // Inicializar los sensores
     for (int i = 0; i < NUM_SENSORS; i++) {
     int *sensor_index = malloc(sizeof(int));
@@ -120,8 +102,16 @@ int main() {
     if (pthread_create(&sensor_threads[i], NULL, measure_distance, sensor_index) != 0) {
         printf("Error al crear el hilo de medición para el sensor %d\n", i + 1);
         return 1;
+        }
     }
-}
+
+            // Inicializar el mutex
+    pthread_mutex_init(&distance_mutex, NULL);
+
+    // Declarar los hilos
+    pthread_t sensor_threads[NUM_SENSORS];
+    pthread_t motor_thread;
+    pthread_t reset_thread;
 
     // Inicializar el pin del motor
     gpioSetMode(MOTOR_PIN_1, PI_OUTPUT);
