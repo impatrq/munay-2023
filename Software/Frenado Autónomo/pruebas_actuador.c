@@ -26,60 +26,50 @@ char *get_braking_profile() {
     CURL *curl;
     CURLcode res;
     static char response[100] = "";  // Almacena la respuesta del servidor
-    memset(response, 0, sizeof(response)); //Asegurar que el buffer está vacío
+    memset(response, 0, sizeof(response)); // Asegurar que el buffer está vacío
 
     curl = curl_easy_init();
-    if(curl) {
-        // Configura cURL para hacer una solicitud GET
+    if (curl) {
         curl_easy_setopt(curl, CURLOPT_URL, URL);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
 
-        // Realiza la solicitud
         res = curl_easy_perform(curl);
 
-        // Verifica si ocurrió un error
-        if(res != CURLE_OK) {
+        if (res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         }
-        // Libera recursos de cURL
         curl_easy_cleanup(curl);
     }
 
-    //Verificar que la respuesta contenga algo
-    if(strlen(response) == 0){
-
+    if (strlen(response) == 0) {
         fprintf(stderr, "Error: respuesta del servidor vacía.\n");
         return "unknown";
-
     }
 
     printf("Respuesta completa del servidor: %s\n", response);
 
-    //Parsear la respuesta JSON con cJSON
     cJSON *json = cJSON_Parse(response);
-    if(!json) {
+    if (!json) {
         fprintf(stderr, "Error al parsear JSON: %s\n", cJSON_GetErrorPtr());
         return "unknown";
     }
 
-    //Extraer el valor del campo "profile"
-    cJSON *profile_item = cJSON_GetObjectItemCaseSensitive(json, "global_profile");
+    cJSON *profile_item = cJSON_GetObjectItemCaseSensitive(json, "profile");
     if (cJSON_IsString(profile_item) && (profile_item->valuestring != NULL)) {
-        printf("Perfil extraído: %s\n", profile_item->valuestring);
-        static char global_profile[10];
-        strncpy(global_profile, profile_item->valuestring, sizeof(global_profile) - 1);
-        global_profile[sizeof(global_profile) - 1] = '\0'; // Asegurar el terminador nulo
-
-        cJSON_Delete(json); // Liberar memoria
-        return global_profile;
+        static char profile[10];
+        strncpy(profile, profile_item->valuestring, sizeof(profile) - 1);
+        profile[sizeof(profile) - 1] = '\0';
+        cJSON_Delete(json);
+        return profile;
     } else {
-        fprintf(stderr, "Error: el campo 'global_profile' no es válido o no existe.\n");
+        fprintf(stderr, "Error: el campo 'profile' no es válido o no existe.\n");
     }
 
-    cJSON_Delete(json); // Liberar memoria
+    cJSON_Delete(json);
     return "unknown";
 }
+
 
 // Definir los sensores
 Sensor sensors[NUM_SENSORS] = {
@@ -174,24 +164,25 @@ void* reset_min_distance(void* arg) {
     return NULL;
 }
 
-void *update_braking_profile(void *arg){
-
-    while(1){
-        //Consulta el perfil del servidor
+void *update_braking_profile(void *arg) {
+    while (1) {
         char *new_profile = get_braking_profile();
 
-        //Protege el acceso a la variable global con un mutex
-        pthread_mutex_lock(&profile_mutex);
-        strncpy(global_profile, new_profile, sizeof(global_profile) - 1);
-        global_profile[sizeof(global_profile) - 1] = '\0'; // Asegurar el terminador nulo
-        pthread_mutex_unlock(&profile_mutex);
+        if (strcmp(new_profile, "unknown") != 0) {
+            pthread_mutex_lock(&profile_mutex);
+            strncpy(global_profile, new_profile, sizeof(global_profile) - 1);
+            global_profile[sizeof(global_profile) - 1] = '\0';
+            pthread_mutex_unlock(&profile_mutex);
+            printf("Perfil actualizado: %s\n", global_profile);
+        } else {
+            fprintf(stderr, "Error al actualizar el perfil.\n");
+        }
 
-        printf("Perfil actualizado: %s\n", global_profile);
-
-        sleep(5); //Consulta cada 5 segundos
+        sleep(5); // Consulta cada 5 segundos
     }
-
+    return NULL;
 }
+
 
 
 int main() {
@@ -199,6 +190,8 @@ int main() {
     // Procesa la respuesta y usa el perfil de frenado
     printf("Perfil de frenado actual: %s\n", global_profile);
 
+    //Declarar variable para actualizar el perfil
+    char local_profile[10];
 
     // Inicializar el mutex
     pthread_mutex_init(&distance_mutex, NULL);
@@ -240,8 +233,14 @@ int main() {
         return 1;
     }
 
+    //Acceder a la variable global de perfil
+    pthread_mutex_lock(&profile_mutex);
+    strncpy(local_profile, global_profile, sizeof(local_profile) - 1);
+    local_profile[sizeof(local_profile) - 1] = '\0';
+    pthread_mutex_unlock(&profile_mutex);
+
     // añadir lógica para usar el perfil en el código de frenado
-    if (strcmp(global_profile, "dry") == 0) {
+    if (strcmp(local_profile, "dry") == 0) {
 
         // Crear hilos de medición para cada sensor
         for (int i = 0; i < NUM_SENSORS; i++) {
@@ -280,7 +279,7 @@ int main() {
         return 0;
 
 
-    } else if (strcmp(global_profile, "rain") == 0) {
+    } else if (strcmp(local_profile, "rain") == 0) {
         printf("Modo de frenado en condiciones de lluvia.\n");
         // Código para modo lluvia, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas
         // Crear hilos de medición para cada sensor
@@ -316,7 +315,7 @@ int main() {
         pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
 
         return 0;
-    } else if (strcmp(global_profile, "snow") == 0) {
+    } else if (strcmp(local_profile, "snow") == 0) {
         printf("Modo de frenado en condiciones de nieve.\n");
         // Código para modo nieve, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas 
         // Crear hilos de medición para cada sensor
