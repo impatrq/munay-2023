@@ -1,10 +1,33 @@
 # Software
 
-En esta carpeta se encuentran los programas desarrollados por el equipo Munay a lo largo del año.
+Este repositorio contiene el código y los recursos necesarios para el funcionamiento del sistema de **frenado autónomo** y su dashboard.
 
-Cada archivo se encuentra detallado con anotaciones que describen cada parte de su funcionamiento.
+## Estructura del Proyecto
+
+### 1. `Dashboard`
+Esta carpeta contiene el código para la interfaz de usuario (Dashboard):
+- **`assets/ y static/`**: Archivos de estilo CSS y código JavaScript para la interfaz web.
+- **`templates/`**: Archivo HTML con la estructura de la página principal del dashboard
+- **`main.py`**: Script principal del servidor backend que conecta el hardware con el dashboard.
+
+### 2. `Frenado Autónomo/`
+Archivos del sistema de frenado autónomo escritos en C y contienen el funcionamiento principal de este sistema.
+- **`libs/`**: Contienen las librerías que usamos para la inicialización de sensores y medición de distancia. 
+- **`frenado_autónomo.c`**: Implementación principal del sistema.
 
 
-## Dashboard
+## Instalación y Configuración
 
-Consta de una serie de carpetas destinadas a la interfaz web, y un archivo python de la aplicación Flask encargada del frontend del dashboard
+### Prerrequisitos
+- Tener instalados `gcc` para compilar el código en C.
+- Instalar las dependencias correspondientes en cada caso:
+ ```bash
+   cd Dashboard && pip install -r requirements.txt
+   ``` 
+ ```bash
+   cd Frenado Autónomo && pip install -r requirements.txt
+   ``` 
+
+### Pasos
+1. Clonar el repositorio en tu Raspberry Pi o máquina de desarrollo.
+2. 
