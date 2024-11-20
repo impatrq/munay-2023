@@ -12,6 +12,9 @@
 
 #define NUM_SENSORS 3
 
+char global_profile[10] = "dry"; //perfil actual (valor inicial por defecto)
+
+
 // Función de escritura para almacenar la respuesta de cURL
 size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
     strcat(data, (char *)ptr);
@@ -57,29 +60,25 @@ char *get_braking_profile() {
     cJSON *json = cJSON_Parse(response);
     if(!json) {
         fprintf(stderr, "Error al parsear JSON: %s\n", cJSON_GetErrorPtr());
-        return unknown;
+        return "unknown";
     }
 
     //Extraer el valor del campo "profile"
-    cJSON *profile_item = cJSON_GetObjectItemCaseSensitive(json, "profile");
+    cJSON *profile_item = cJSON_GetObjectItemCaseSensitive(json, "global_profile");
     if (cJSON_IsString(profile_item) && (profile_item->valuestring != NULL)) {
         printf("Perfil extraído: %s\n", profile_item->valuestring);
-        static char profile[10];
-        strncpy(profile, profile_item->valuestring, sizeof(profile) - 1);
-        profile[sizeof(profile) - 1] = '\0'; // Asegurar el terminador nulo
+        static char global_profile[10];
+        strncpy(global_profile, profile_item->valuestring, sizeof(global_profile) - 1);
+        global_profile[sizeof(global_profile) - 1] = '\0'; // Asegurar el terminador nulo
 
         cJSON_Delete(json); // Liberar memoria
-        return profile;
+        return global_profile;
     } else {
-        fprintf(stderr, "Error: el campo 'profile' no es válido o no existe.\n");
+        fprintf(stderr, "Error: el campo 'global_profile' no es válido o no existe.\n");
     }
 
     cJSON_Delete(json); // Liberar memoria
     return "unknown";
-    
-    printf("Perfil extraído: %s\n", profile);
-
-    return response;  // Devuelve la respuesta como una cadena
 }
 
 // Definir los sensores
@@ -98,6 +97,7 @@ Sensor sensors[NUM_SENSORS] = {
 // Variables compartidas
 double min_distance = 9999;  // Almacena la distancia mínima medida
 pthread_mutex_t distance_mutex;  // Mutex para proteger el acceso a la variable compartida
+pthread_mutex_t profile_mutex; //Mutex para proteger el perfil 
 
 // Variable para el estado del freno
 int motor_active = 0;  // 0 = reposo, 1 = frenando
@@ -105,6 +105,16 @@ int motor_active = 0;  // 0 = reposo, 1 = frenando
 // Función para controlar el motor
 void* control_motor(void* arg) {
     while (1) {
+        char current_profile[10]; // Almacena el perfil actual
+
+        //Bloquea el mutex y copia el perfil actual
+        pthread_mutex_lock(&profile_mutex);
+        strncpy(current_profile, global_profile, sizeof(current_profile) - 1);
+        current_profile[sizeof(current_profile) - 1] = '\0'; // Asegurar el terminador nulo
+        pthread_mutex_unlock(&profile_mutex);
+
+        printf("Perfil actual: %s\n", current_profile);
+
         pthread_mutex_lock(&distance_mutex); //bloquear acceso a variable de distancia mínima
         double current_distance = min_distance;
         pthread_mutex_unlock(&distance_mutex); //desbloquear acceso 
@@ -164,21 +174,41 @@ void* reset_min_distance(void* arg) {
     return NULL;
 }
 
+void *update_braking_profile(void *arg){
+
+    while(1){
+        //Consulta el perfil del servidor
+        char *new_profile = get_braking_profile();
+
+        //Protege el acceso a la variable global con un mutex
+        pthread_mutex_lock(&profile_mutex);
+        strncpy(global_profile, new_profile, sizeof(global_profile) - 1);
+        global_profile[sizeof(global_profile) - 1] = '\0'; // Asegurar el terminador nulo
+        pthread_mutex_unlock(&profile_mutex);
+
+        printf("Perfil actualizado: %s\n", global_profile);
+
+        sleep(5); //Consulta cada 5 segundos
+    }
+
+}
+
 
 int main() {
-    char *profile = get_braking_profile();
     
     // Procesa la respuesta y usa el perfil de frenado
-    printf("Perfil de frenado actual: %s\n", profile);
+    printf("Perfil de frenado actual: %s\n", global_profile);
 
 
     // Inicializar el mutex
     pthread_mutex_init(&distance_mutex, NULL);
+    pthread_mutex_init(&profile_mutex, NULL);
 
     // Declarar los hilos
     pthread_t sensor_threads[NUM_SENSORS];
     pthread_t motor_thread;
     pthread_t reset_thread;
+    pthread_t profile_thread;
 
     if (gpioInitialise() < 0) {
             printf("¡Error al iniciar pigpio!\n");
@@ -204,8 +234,14 @@ int main() {
         return 1;
     }
 
+    //Iniciar el hilo de actualización del perfil
+    if (pthread_create(&profile_thread, NULL, update_braking_profile, NULL) != 0) {
+        printf("Error al crear el hilo de actualización del perfil\n");
+        return 1;
+    }
+
     // añadir lógica para usar el perfil en el código de frenado
-    if (strcmp(profile, "dry") == 0) {
+    if (strcmp(global_profile, "dry") == 0) {
 
         // Crear hilos de medición para cada sensor
         for (int i = 0; i < NUM_SENSORS; i++) {
@@ -235,14 +271,16 @@ int main() {
         }
         pthread_join(motor_thread, NULL);
         pthread_join(reset_thread, NULL);
+        pthread_join(profile_thread, NULL);
 
         gpioTerminate();  // Finalizar pigpio
         pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
+        pthread_mutex_destroy(&profile_mutex); //Destruir el mutex de perfil
 
         return 0;
 
 
-    } else if (strcmp(profile, "rain") == 0) {
+    } else if (strcmp(global_profile, "rain") == 0) {
         printf("Modo de frenado en condiciones de lluvia.\n");
         // Código para modo lluvia, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas
         // Crear hilos de medición para cada sensor
@@ -278,7 +316,7 @@ int main() {
         pthread_mutex_destroy(&distance_mutex);  // Destruir el mutex
 
         return 0;
-    } else if (strcmp(profile, "snow") == 0) {
+    } else if (strcmp(global_profile, "snow") == 0) {
         printf("Modo de frenado en condiciones de nieve.\n");
         // Código para modo nieve, actualmente es igual al seco, debe cambiarse cuando se puedan hacer pruebas 
         // Crear hilos de medición para cada sensor
