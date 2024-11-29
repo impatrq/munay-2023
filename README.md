@@ -30,6 +30,8 @@ Munay se destaca como un sistema de supervisión simplificado y altamente eficie
 
 Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
+<img src="Multimedia 2024/Equipo Munay.jpg">
+
 ### Dubal, Agustín
 * 📷 Instagram: agus_dubal
 
