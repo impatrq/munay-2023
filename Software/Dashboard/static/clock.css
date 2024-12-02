@@ -1,0 +1,49 @@
+/*css del reloj*/
+
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    height:100vh;
+    display:initial;
+    justify-content:center;
+    align-items:center;
+    background:#121222;
+}
+
+.datetime{
+    color:#fff;
+    background:#121222;
+    width: 263px;
+    padding:1px 1px;
+    position:relative;
+    bottom:-11rem;
+}
+
+.time{
+    font-size:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.time span:not(:last-child){
+    position:relative;
+    margin:0 6px;
+    font-weight:600;
+    text-align:center;
+    letter-spacing:3px;
+}
+
+.time span:last-child{
+    background:#121222;
+    font-size:20px;
+    font-weight:600;
+    text-transform:uppercase;
+    margin-top:10px;
+    padding:0 5px;
+    border-radius:3px;
+      
+}

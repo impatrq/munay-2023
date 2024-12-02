@@ -1,14 +1,16 @@
 <div align="center">
 
-# [Proyecto Munay - IMPA TRQ](https://www.instagram.com/proyecto_munay/)
+# [Proyecto Munay - IMPA TRQ](https://www.instagram.com/proyecto_munay24/)
 
-<img src="/imagenes/munay logo-02 (1)1.png" height="100" width="450" />
+<img src="Multimedia 2024/Diseños/munay transparente.png" height="400" width="400" />
 
 &nbsp;
 
 | Página web | Email | Instagram |
 |------------|-------|-----------|
-|[Munay Web](https://proyectomunay.github.io/)|munay.impatrq@gmail.com|[@proyecto_munay](https://www.instagram.com/proyecto_munay/)|
+|[Munay Web](https://munay-impa.web.app/)|munayimpatrq@gmail.com|[@proyecto_munay24](https://www.instagram.com/proyecto_munay24/)|
+
+[Carpeta de campo](https://docs.google.com/document/d/1iEDpXWB5f0wMk0qT9sCNHTZRmYYTim4XL416siWD0ac/edit?usp=sharing)
 
 &nbsp;
 
@@ -28,55 +30,49 @@ Munay se destaca como un sistema de supervisión simplificado y altamente eficie
 
 Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
-### Basile, Ignacio Javier
-* 📷 Instagram: basilee05
+<img src="Multimedia 2024/Equipo Munay.jpg"/>
 
-* 📧 ignaciojavierbasile@gmail.com
+### Dubal, Agustín
+* 📷 Instagram: agus_dubal
 
-* LinkedIn: https://www.linkedin.com/in/demian-heis/
+* 📧 agustin.dubal06@gmail.com
 
-### Echezuria Gonzalez, Jorge Luis
-* 📷 Instagram: jorgeechezuria_
+* LinkedIn: https://www.linkedin.com/in/agustin-dubal/
 
-* 📧 jlechezuria@gmail.com
+### Gonzalez Pautaso, Valentino
+* 📷 Instagram: valenpautaso
 
-* LinkedIn: https://www.linkedin.com/in/jorge-echezuria-60962a245/
-
-### Heis, Demian Hernán
-* 📷 Instagram: demian.h_
-
-* 📧 demiheis@gmail.com
-
-* LinkedIn: https://www.linkedin.com/in/demian-heis/
-
-### Minaya Palomino, Jesús Eduardo
-* 📷 Instagram: jesusminaya_
-
-* 📧 jesusminayapalomino@gmail.com
-
-* LinkedIn: http://www.linkedin.com/in/jesus-minaya-53a314292
-
-### Ordoñez, Lucero Soledad Rubi
-* 📷 Instagram: lucero092_
-
-* 📧 lucerosoledad56@gmail.com
+* 📧 gonzalezpautasovalentino@gmail.com
   
-* LinkedIn: https://www.linkedin.com/in/lucero-soledad-rub%C3%AD-ordo%C3%B1ez-6a7ab429b/
+* LinkedIn: https://www.linkedin.com/in/valentino-gonzalez-pautaso-622896302/
 
-### Retamar, Faustina
+### Melchor, Francisco
+* 📷 Instagram: francisco_melchor05
 
-* 📷 Instagram: faustinaar_
+* 📧 fmelchor2005@gmail.com
 
-* 📧 retamarfaustinaa@gmail.com
+* LinkedIn: https://www.linkedin.com/in/francisco-melchor/
 
-* LinkedIn: https://www.linkedin.com/in/faustina-retamar-43ab861a6/
+### Tamai, Franco Nahuel
+* 📷 Instagram: fran1y_
 
-### Rios, Celeste Aylen
-* 📷 Instagram: celestearios
+* 📧 franconahueltamai@gmail.com
 
-* 📧 celesteaylenrios@gmail.com
+* LinkedIn: http://www.linkedin.com/in/franco-tamai-7262402a6/
 
-* LinkedIn: https://www.linkedin.com/in/celestearios/
+### Badeigts, Máximo
+* 📷 Instagram: maxibadeigts
+
+* 📧 maximobadeigts05@gmail.com
+  
+* LinkedIn: https://www.linkedin.com/in/maximo-badeigts/
+
+### Lucentini, Juan Sebastián
+* 📷 Instagram: juanselucentini
+
+* 📧 juanse.lucentini@gmail.com
+
+* LinkedIn: https://www.linkedin.com/in/juan-sebastián-lucentini-117896302/
 
 
 <div align="center">
@@ -87,10 +83,10 @@ Somos un grupo de alumnos de E.E.S.T. N°7 "Taller Regional Quilmes" (IMPA).
 
 ## ¿Cómo contactarnos?
 
-* 📧 Email: munay.impatrq@gmail.com
+* 📧 Email: munayimpatrq@gmail.com
 
-* 🌐 Página Web: https://proyectomunay.github.io/
-
-* 📷 Instagram: @proyecto_munay
+* 🌐 Página Web: https://munay-impa.web.app/
+  
+* 📷 Instagram: @proyecto_munay24
 
 * 🗞️ Linktr.ee: https://linktr.ee/proyecto_munay
